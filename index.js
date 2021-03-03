@@ -2,9 +2,12 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
 const command = require('./command')
+const firstMessage = require('./first-message')
 
 client.on('ready', () => {
   console.log('Bot is ready!')
+
+  // firstMessage(client, '816389077254668309', 'hello world', ['🔥', '🍈'])
 
   command(client, ['ping', 'test'], (message) => {
     message.channel.send('Pong')
