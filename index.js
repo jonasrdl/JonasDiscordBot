@@ -1,42 +1,37 @@
-const Discord = require('discord.js')
-const client = new Discord.Client()
-const config = require('./config.json')
-const command = require('./command')
-const firstMessage = require('./first-message')
+const Discord = require('discord.js');
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+const client = new Discord.Client();
 
 client.on('ready', () => {
-  console.log('Bot is ready!')
+    console.log('Bot logged in as ' + client.user.tag);
+    console.log('The bot is currently on ' + client.guilds.cache.size + 'Server(s)');
+});
 
-  // firstMessage(client, '816389077254668309', 'hello world', ['🔥', '🍈'])
-
-  command(client, ['ping', 'test'], (message) => {
-    message.channel.send('Pong')
-  })
-
-  command(client, 'servers', (message) => {
-    client.guilds.cache.forEach((guild) => {
-      message.channel.send(`${guild.name} has ${guild.memberCount} members`)
-    })
-  })
-
-  command(client, ['cc', 'clearchannel'], (message) => {
-    if (message.member.hasPermission('ADMINISTRATOR')) {
-      message.channel.messages.fetch().then((results) => {
-        message.channel.bulkDelete(results)
-      })
+client.on('message', (message) => {
+    if (!message.member.user.bot && message.guild) {
+        if (message.content === '.help') {
+            message.channel.send('Hallo Welt');
+        }
     }
-  })
+});
 
-  command(client, 'status', (message) => {
-    const content = message.content.replace('.status ', '')
+client.on('message', (message) => {
+    if (!message.member.user.bot && message.guild) {
+        if (message.content.startsWith('.avatar')) {
+            if (message.mentions.users.first()) {
+                let user = message.mentions.users.first();
+                let attachment = new Discord.MessageAttachment(user.avatarURL());
+                message.reply(attachment);
+            } else {
+                let attachment = new Discord.MessageAttachment(message.member.user.avatarURL());
+                message.reply(attachment);
+            }
+            console.log(message.member.user.tag + ' executed command .avatar');
+        }
+    }
+});
 
-    client.user.setPresence({
-      activity: {
-        name: content,
-        type: 0,
-      },
-    })
-  })
-})
-
-client.login(config.token)
+client.login(config.token).then(r => {
+    console.log('Bot ready!');
+});
