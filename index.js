@@ -49,6 +49,6 @@ client.on('message', (message) => {
     }
 });
 
-client.login(config.token).then(r => {
+client.login(config.token).then(() => {
     console.log('Bot ready!');
 });
