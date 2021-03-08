@@ -3,9 +3,12 @@ const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
 const client = new Discord.Client();
 
+let d = new Date();
+let time = d.toLocaleTimeString('de', {hour12: false});
+
 client.on('ready', () => {
     console.log('Bot logged in as ' + client.user.tag);
-    console.log('The bot is currently on ' + client.guilds.cache.size + 'Server(s)');
+    console.log('The bot is currently on ' + client.guilds.cache.size + ' server(s)');
 });
 
 client.on('message', (message) => {
@@ -34,6 +37,18 @@ client.on('message', (message) => {
 });
 
 client.on('message', (message) => {
+    if (!message.member.user.bot && message.guild) {
+        if (message.content === '.time') {
+            let timeEmbed = new Discord.MessageEmbed()
+                .setColor('#1f5e87')
+                .setTitle(time);
+
+            message.channel.send(timeEmbed);
+        }
+    }
+});
+
+client.on('message', (message) => {
     if (message.content === '.help' && message.guild && !message.member.user.bot) {
         let helpEmbed = new Discord.MessageEmbed()
             .setColor('#1f5e87')
@@ -43,6 +58,7 @@ client.on('message', (message) => {
             .setDescription('Help')
             .addField('.offend @[Username]', 'Offend someone', false)
             .addField('.avatar @[Username]', 'Get a users avatar', false)
+            .addField('.time', 'Get the current Time', false)
             .setTimestamp();
 
         message.channel.send(helpEmbed);
