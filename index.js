@@ -3,8 +3,14 @@ const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
 const client = new Discord.Client();
 
-let d = new Date();
-let time = d.toLocaleTimeString('de', {hour12: false});
+let time;
+
+function getTime() {
+    let d = new Date();
+    time = d.toLocaleTimeString('de', {hour12: false});
+}
+
+setInterval(getTime, 1000);
 
 client.on('ready', () => {
     console.log('Bot logged in as ' + client.user.tag);
@@ -37,15 +43,17 @@ client.on('message', (message) => {
 });
 
 client.on('message', (message) => {
-    if (!message.member.user.bot && message.guild) {
-        if (message.content === '.time') {
-            let timeEmbed = new Discord.MessageEmbed()
-                .setColor('#1f5e87')
-                .setTitle(time);
+    setTimeout(function () {
+        if (!message.member.user.bot && message.guild) {
+            if (message.content === '.time') {
+                let timeEmbed = new Discord.MessageEmbed()
+                    .setColor('#1f5e87')
+                    .setTitle(time);
 
-            message.channel.send(timeEmbed);
+                message.channel.send(timeEmbed).then(() => console.log('Executed .time command'));
+            }
         }
-    }
+    }, 1000);
 });
 
 client.on('message', (message) => {
