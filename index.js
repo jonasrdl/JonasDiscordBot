@@ -34,10 +34,12 @@ client.on('message', (message) => {
 });
 
 client.on('message', (message) => {
-    if (!message.member.user.bot && message.guild) {
-        if (message.mentions.users.first()) {
-            let user = message.mentions.users.first();
-            message.channel.send(`${user}` + ' is stupid :^)');
+    if (message.content.startsWith('.offend')) {
+        if (!message.member.user.bot && message.guild) {
+            if (message.mentions.users.first()) {
+                let user = message.mentions.users.first();
+                message.channel.send(`${user}` + ' is stupid :^)');
+            }
         }
     }
 });
