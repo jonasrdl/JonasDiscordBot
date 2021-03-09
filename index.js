@@ -23,12 +23,11 @@ client.on('message', (message) => {
             if (message.mentions.users.first()) {
                 let user = message.mentions.users.first();
                 let attachment = new Discord.MessageAttachment(user.avatarURL());
-                message.reply(attachment);
+                message.reply(attachment).then(() => console.log('Attachment sent'));
             } else {
                 let attachment = new Discord.MessageAttachment(message.member.user.avatarURL());
-                message.reply(attachment);
+                message.reply(attachment).then(() => console.log('.avatar sent'));
             }
-            console.log(message.member.user.tag + ' executed command .avatar');
         }
     }
 });
@@ -38,7 +37,7 @@ client.on('message', (message) => {
         if (!message.member.user.bot && message.guild) {
             if (message.mentions.users.first()) {
                 let user = message.mentions.users.first();
-                message.channel.send(`${user}` + ' is stupid :^)');
+                message.channel.send(`${user}` + ' is stupid :^)').then(() => console.log('.offend sent'));
             }
         }
     }
@@ -71,7 +70,7 @@ client.on('message', (message) => {
             .addField('.time', 'Get the current Time', false)
             .setTimestamp();
 
-        message.channel.send(helpEmbed);
+        message.channel.send(helpEmbed).then(() => console.log('helpEmbed sent'));
     }
 });
 
