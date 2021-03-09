@@ -25,16 +25,14 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-    if (!message.member.user.bot && message.guild) {
-        if (message.content.startsWith('.avatar')) {
-            if (message.mentions.users.first()) {
-                let user = message.mentions.users.first();
-                let attachment = new Discord.MessageAttachment(user.avatarURL());
-                message.reply(attachment).then(() => console.log('Attachment sent'));
-            } else {
-                let attachment = new Discord.MessageAttachment(message.member.user.avatarURL());
-                message.reply(attachment).then(() => console.log('.avatar sent'));
-            }
+    if (message.content.startsWith('.avatar')) {
+        if (message.mentions.users.first()) {
+            let user = message.mentions.users.first();
+            let attachment = new Discord.MessageAttachment(user.avatarURL());
+            message.reply(attachment).then(() => console.log('Attachment sent'));
+        } else {
+            let attachment = new Discord.MessageAttachment(message.member.user.avatarURL());
+            message.reply(attachment).then(() => console.log('.avatar sent'));
         }
     }
 });
@@ -52,30 +50,32 @@ client.on('message', (message) => {
 
 client.on('message', (message) => {
     setTimeout(function () {
-        if (!message.member.user.bot && message.guild) {
-            if (message.content === '.time') {
-                let timeEmbed = new Discord.MessageEmbed()
-                    .setColor('#1f5e87')
-                    .setTitle(time);
+        if (message.content === '.time') {
+            let timeEmbed = new Discord.MessageEmbed()
+                .setColor('#1f5e87')
+                .setTitle(time);
 
-                message.channel.send(timeEmbed).then(() => console.log('Executed .time command'));
-            }
+            message.channel.send(timeEmbed).then(() => console.log('Executed .time command'));
         }
     }, 1000);
 });
 
 client.on('message', (message) => {
     setTimeout(function () {
-        if (!message.member.user.bot && message.guild) {
-            if (message.content === '.date') {
-                let dateEmbed = new Discord.MessageEmbed()
-                    .setColor('#1f5e87')
-                    .setTitle(datum);
+        if (message.content === '.date') {
+            let dateEmbed = new Discord.MessageEmbed()
+                .setColor('#1f5e87')
+                .setTitle(datum);
 
-                message.channel.send(dateEmbed).then(() => console.log('Executed .date command'));
-            }
+            message.channel.send(dateEmbed).then(() => console.log('Executed .date command'));
         }
     }, 1000);
+});
+
+client.on('message', (message) => {
+    if (message.content === '.dm') {
+        message.author.send('Hi! Ich bins, Jonas Bot :^)').then(() => console.log('Sent private Message'));
+    }
 });
 
 client.on('message', (message) => {
@@ -89,6 +89,7 @@ client.on('message', (message) => {
             .addField('.offend @[Username]', 'Offend someone', false)
             .addField('.avatar @[Username]', 'Get a users avatar', false)
             .addField('.time', 'Get the current Time', false)
+            .addField('.dm', 'Send yourself a private message', false)
             .setTimestamp();
 
         message.channel.send(helpEmbed).then(() => console.log('helpEmbed sent'));
