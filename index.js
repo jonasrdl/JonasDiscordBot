@@ -25,6 +25,8 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
+    
+    // Avatar command
     if (message.content.startsWith('.avatar')) {
         if (message.mentions.users.first()) {
             let user = message.mentions.users.first();
@@ -35,9 +37,8 @@ client.on('message', (message) => {
             message.reply(attachment).then(() => console.log('.avatar sent'));
         }
     }
-});
 
-client.on('message', (message) => {
+    // Offend command
     if (message.content.startsWith('.offend')) {
         if (!message.member.user.bot && message.guild) {
             if (message.mentions.users.first()) {
@@ -46,9 +47,8 @@ client.on('message', (message) => {
             }
         }
     }
-});
 
-client.on('message', (message) => {
+    // Time command
     setTimeout(function () {
         if (message.content === '.time') {
             let timeEmbed = new Discord.MessageEmbed()
@@ -58,9 +58,8 @@ client.on('message', (message) => {
             message.channel.send(timeEmbed).then(() => console.log('Executed .time command'));
         }
     }, 1000);
-});
 
-client.on('message', (message) => {
+    // Date command
     setTimeout(function () {
         if (message.content === '.date') {
             let dateEmbed = new Discord.MessageEmbed()
@@ -70,15 +69,13 @@ client.on('message', (message) => {
             message.channel.send(dateEmbed).then(() => console.log('Executed .date command'));
         }
     }, 1000);
-});
 
-client.on('message', (message) => {
+    // Dm command
     if (message.content === '.dm') {
         message.author.send('Hi! Ich bins, Jonas Bot :^)').then(() => console.log('Sent private Message'));
     }
-});
 
-client.on('message', (message) => {
+    // Help Embed command
     if (message.content === '.help' && message.guild && !message.member.user.bot) {
         let helpEmbed = new Discord.MessageEmbed()
             .setColor('#1f5e87')
@@ -89,6 +86,7 @@ client.on('message', (message) => {
             .addField('.offend @[Username]', 'Offend someone', false)
             .addField('.avatar @[Username]', 'Get a users avatar', false)
             .addField('.time', 'Get the current Time', false)
+            .addField('.date', 'Get the current Date', false)
             .addField('.dm', 'Send yourself a private message', false)
             .setTimestamp();
 
