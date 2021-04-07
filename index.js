@@ -26,8 +26,6 @@ function getDate() {
   date = d.toLocaleDateString('de');
 }
 
-setInterval(getTime, 1000);
-
 client.on('ready', () => {
   console.log('Bot logged in as ' + client.user.tag);
   console.log(
