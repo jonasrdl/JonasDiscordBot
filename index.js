@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+const api_token = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
 const client = new Discord.Client();
+const fetch = require('node-fetch');
 const quotes = [
   'Any time you try to create an Internet meme, automatic fail. Thats like the worst thing you can do.',
   'I feel in todays time, you are truly successful if a meme is based on you.',
@@ -104,6 +106,21 @@ client.on('message', (message) => {
     message.channel
       .send(quoteEmbed)
       .then(() => console.log('Executed .quote command'));
+  }
+
+  //Weather Command
+  if (message.content === '.temperature') {
+    fetch(
+      'https://api.openweathermap.org/data/2.5/weather?q=karlsruhe&units=metric&appid=' +
+        config.api_token
+    )
+      .then((response) => response.json())
+      .then(console.log('Temperature command executed!'))
+      .then((data) =>
+        message.channel.send(
+          'Temperatur in Karlsruhe: ' + data.main.temp + '°C'
+        )
+      );
   }
 
   // Help Embed command
