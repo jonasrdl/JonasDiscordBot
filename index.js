@@ -156,6 +156,7 @@ client.on('message', (message) => {
       .addField('.date', 'Get the current Date', false)
       .addField('.dm', 'Send yourself a private message', false)
       .addField('.quote', 'Get a random Quote', false)
+      .addField('.temperature [City]', 'Get the temperature of any city', false)
       .setTimestamp();
 
     message.channel.send(helpEmbed).then(() => console.log('helpEmbed sent'));
