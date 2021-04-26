@@ -17,6 +17,7 @@ const quotes = [
 
 let time;
 let date;
+let prefix = '.';
 
 let d = new Date();
 
@@ -109,8 +110,8 @@ client.on('message', (message) => {
   }
 
   //Weather Command
-  if (message.content === '.temperature') {
-    fetch(
+  if (message.content.startsWith('.temperature')) {
+    /* fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=karlsruhe&units=metric&appid=' +
         config.api_token
     )
@@ -119,6 +120,29 @@ client.on('message', (message) => {
       .then((data) =>
         message.channel.send(
           'Temperatur in Karlsruhe: ' + data.main.temp + '°C'
+        )
+      ); */
+
+    prefix = '.';
+
+    const args = message.content.slice(prefix.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
+
+    fetch(
+      'https://api.openweathermap.org/data/2.5/weather?q=' +
+        args +
+        '&units=metric&appid=' +
+        config.api_token
+    )
+      .then((response) => response.json())
+      .then(
+        console.log(
+          'Temperature command executed, showing temperature from ' + args
+        )
+      )
+      .then((data) =>
+        message.channel.send(
+          'Die Temperatur in ' + args + ' beträgt : ' + data.main.temp + '°C'
         )
       );
   }
