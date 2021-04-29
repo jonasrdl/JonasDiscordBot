@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-const api_token = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+const config = JSON.parse(fs.readFileSync('../cfg/config.json', 'utf-8'));
+const api_token = JSON.parse(fs.readFileSync('../cfg/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
 const quotes = [
