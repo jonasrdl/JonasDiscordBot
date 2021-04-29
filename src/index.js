@@ -116,6 +116,15 @@ client.on('message', (message) => {
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
 
+    if (!args.length) {
+      message.channel.send(
+        'Keine Stadt angegeben.\nBrauchst du Hilfe? -> .help'
+      );
+      return;
+    }
+
+    console.log(args);
+
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=' +
         args +
