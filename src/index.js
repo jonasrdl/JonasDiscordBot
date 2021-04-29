@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-const api_token = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+const config = JSON.parse(fs.readFileSync('../cfg/config.json', 'utf-8'));
+const api_token = JSON.parse(fs.readFileSync('../cfg/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
 const quotes = [
@@ -111,22 +111,19 @@ client.on('message', (message) => {
 
   //Weather Command
   if (message.content.startsWith('.temperature')) {
-    /* fetch(
-      'https://api.openweathermap.org/data/2.5/weather?q=karlsruhe&units=metric&appid=' +
-        config.api_token
-    )
-      .then((response) => response.json())
-      .then(console.log('Temperature command executed!'))
-      .then((data) =>
-        message.channel.send(
-          'Temperatur in Karlsruhe: ' + data.main.temp + '°C'
-        )
-      ); */
-
     prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
+
+    if (!args.length) {
+      message.channel.send(
+        'Keine Stadt angegeben.\nBrauchst du Hilfe? -> .help'
+      );
+      return;
+    }
+
+    console.log(args);
 
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=' +
@@ -168,6 +165,7 @@ client.on('message', (message) => {
       .addField('.date', 'Get the current Date', false)
       .addField('.dm', 'Send yourself a private message', false)
       .addField('.quote', 'Get a random Quote', false)
+      .addField('.temperature [City]', 'Get the temperature of any city', false)
       .setTimestamp();
 
     message.channel.send(helpEmbed).then(() => console.log('helpEmbed sent'));
