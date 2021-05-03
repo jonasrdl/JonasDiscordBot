@@ -166,7 +166,9 @@ client.on('message', (message) => {
       .addField('.temperature [City]', 'Get the temperature of any city', false)
       .setTimestamp();
 
-    message.channel.send(helpEmbed).then(() => console.log('helpEmbed sent'));
+    message.channel
+      .send(helpEmbed)
+      .then(() => console.log('.help Command executed'));
   }
 });
 
