@@ -123,8 +123,6 @@ client.on('message', (message) => {
       return;
     }
 
-    console.log(args);
-
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=' +
         args +
