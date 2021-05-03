@@ -14,6 +14,6 @@ Example:
   "api_token": "your-api-token"
 }
 ```
-Any questions? feel free to contact me here:
+That was it! Any questions? feel free to contact me here:
 
 # Email: jonasriedel@jonasriedel.com
