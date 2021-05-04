@@ -28,8 +28,28 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
+  if (message.content.startsWith('prefix')) {
+    message.channel.send('Aktueller Prefix: ' + prefix);
+  }
+
+  if (message.content.startsWith(prefix + 'prefix')) {
+    const args = message.content.slice(prefix.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
+
+    if (!args.length) {
+      message.channel.send(
+        'Keinen Prefix angegeben.\nBrauchst du Hilfe? ->' + prefix + 'help'
+      );
+      return;
+    }
+
+    prefix = args;
+
+    message.channel.send('Prefix geändert zu: ' + args);
+  }
+
   // Avatar command
-  if (message.content.startsWith('.avatar')) {
+  if (message.content.startsWith(prefix + 'avatar')) {
     if (message.mentions.users.first()) {
       let user = message.mentions.users.first();
       let attachment = new Discord.MessageAttachment(user.avatarURL());
@@ -43,7 +63,7 @@ client.on('message', (message) => {
   }
 
   // Offend command
-  if (message.content.startsWith('.offend')) {
+  if (message.content.startsWith(prefix + 'offend')) {
     if (!message.member.user.bot && message.guild) {
       if (message.mentions.users.first()) {
         let user = message.mentions.users.first();
@@ -56,7 +76,7 @@ client.on('message', (message) => {
 
   // Time command
   setTimeout(function () {
-    if (message.content === '.time') {
+    if (message.content === prefix + 'time') {
       let timeEmbed = new Discord.MessageEmbed()
         .setColor('#1f5e87')
         .setTitle(time);
@@ -69,7 +89,7 @@ client.on('message', (message) => {
 
   // Date command
   function dateCommand() {
-    if (message.content === '.date') {
+    if (message.content === prefix + 'date') {
       let dateEmbed = new Discord.MessageEmbed()
         .setColor('#1f5e87')
         .setTitle(date);
@@ -81,14 +101,14 @@ client.on('message', (message) => {
   }
 
   // Dm command
-  if (message.content === '.dm') {
+  if (message.content === prefix + 'dm') {
     message.author
       .send('Hi! Ich bins, Jonas Bot :^)')
       .then(() => console.log('Sent private Message'));
   }
 
   // Quote Command
-  if (message.content === '.quote') {
+  if (message.content === prefix + 'quote') {
     const randomQuote = Math.floor(Math.random() * quotes.length);
 
     let quoteEmbed = new Discord.MessageEmbed()
@@ -101,7 +121,7 @@ client.on('message', (message) => {
   }
 
   //Weather Command
-  if (message.content.startsWith('.temperature')) {
+  if (message.content.startsWith(prefix + 'temperature')) {
     prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');
@@ -109,7 +129,7 @@ client.on('message', (message) => {
 
     if (!args.length) {
       message.channel.send(
-        'Keine Stadt angegeben.\nBrauchst du Hilfe? -> .help'
+        'Keine Stadt angegeben.\nBrauchst du Hilfe? ->' + prefix + 'help'
       );
       return;
     }
@@ -135,7 +155,7 @@ client.on('message', (message) => {
 
   // Help Embed command
   if (
-    message.content === '.help' &&
+    message.content === prefix + 'help' &&
     message.guild &&
     !message.member.user.bot
   ) {
@@ -148,6 +168,7 @@ client.on('message', (message) => {
         'https://cdn.discordapp.com/avatars/209945797918195712/a41ddfe52fdea6c1b8d88b4da5b2a7ef.png?size=128'
       )
       .setDescription('Help')
+      .addField(prefix + 'prefix [prefix]', 'Change Prefix', false)
       .addField('.offend @[Username]', 'Offend someone', false)
       .addField('.avatar @[Username]', 'Get a users avatar', false)
       .addField('.time', 'Get the current Time', false)
@@ -159,7 +180,7 @@ client.on('message', (message) => {
 
     message.channel
       .send(helpEmbed)
-      .then(() => console.log('.help Command executed'));
+      .then(() => console.log(prefix + 'help Command executed'));
   }
 });
 
