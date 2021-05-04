@@ -141,7 +141,7 @@ client.on('message', (message) => {
   ) {
     let helpEmbed = new Discord.MessageEmbed()
       .setColor('#1f5e87')
-      .setTitle('Help Syntax')
+      .setTitle('Author')
       .setURL('https://github.com/jonasrdl')
       .setAuthor(
         'Jonas',
