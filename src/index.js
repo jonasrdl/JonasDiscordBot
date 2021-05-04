@@ -5,16 +5,6 @@ const api_token = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
 const quotes = require('./quotes').quotes;
-/* const quotes = [
-  'Any time you try to create an Internet meme, automatic fail. Thats like the worst thing you can do.',
-  'I feel in todays time, you are truly successful if a meme is based on you.',
-  'Memes just show that people are engaged about something. A meme is just a little inside joke for a group of people that care about a certain thing.',
-  'I have a great sense of humor, I mean even when my meme came out I reposted it. I didnt care. I was laughing, too!',
-  'I dont even know what memes are, Im, like, an old person, so I dont really know what a meme is.',
-  'I am so happy to be a meme.',
-  'Some people only recognize me for that - aint you the meme guy?',
-  'I run a meme type of account on Twitter; I know what my audience is looking for.',
-]; */
 
 let time;
 let date;
@@ -155,7 +145,7 @@ client.on('message', (message) => {
       .setURL('https://github.com/jonasrdl')
       .setAuthor(
         'Jonas',
-        'https://cdn.discordapp.com/avatars/209945797918195712/00b1d6f82c7c2525a18a1a8cb44a0ce6.png?size=128'
+        'https://cdn.discordapp.com/avatars/209945797918195712/a41ddfe52fdea6c1b8d88b4da5b2a7ef.png?size=128'
       )
       .setDescription('Help')
       .addField('.offend @[Username]', 'Offend someone', false)
