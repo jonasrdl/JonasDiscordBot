@@ -4,7 +4,8 @@ const config = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const api_token = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
-const quotes = [
+const quotes = require('./quotes').quotes;
+/* const quotes = [
   'Any time you try to create an Internet meme, automatic fail. Thats like the worst thing you can do.',
   'I feel in todays time, you are truly successful if a meme is based on you.',
   'Memes just show that people are engaged about something. A meme is just a little inside joke for a group of people that care about a certain thing.',
@@ -13,7 +14,7 @@ const quotes = [
   'I am so happy to be a meme.',
   'Some people only recognize me for that - aint you the meme guy?',
   'I run a meme type of account on Twitter; I know what my audience is looking for.',
-];
+]; */
 
 let time;
 let date;
