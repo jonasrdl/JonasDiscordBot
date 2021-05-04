@@ -29,7 +29,7 @@ client.on('ready', () => {
 
 client.on('message', (message) => {
   if (message.content.startsWith('prefix')) {
-    message.channel.send('Aktueller Prefix: ' + prefix);
+    message.channel.send('Actual prefix: ' + prefix);
   }
 
   if (message.content.startsWith(prefix + 'prefix')) {
@@ -38,14 +38,14 @@ client.on('message', (message) => {
 
     if (!args.length) {
       message.channel.send(
-        'Keinen Prefix angegeben.\nBrauchst du Hilfe? ->' + prefix + 'help'
+        'No prefix given.\n Need help? ->' + prefix + 'help'
       );
       return;
     }
 
     prefix = args;
 
-    message.channel.send('Prefix geändert zu: ' + args);
+    message.channel.send('Prefix changed to: ' + args);
   }
 
   // Avatar command
@@ -103,7 +103,7 @@ client.on('message', (message) => {
   // Dm command
   if (message.content === prefix + 'dm') {
     message.author
-      .send('Hi! Ich bins, Jonas Bot :^)')
+      .send('Hi! Its me, Jonas Bot :^)')
       .then(() => console.log('Sent private Message'));
   }
 
@@ -129,7 +129,7 @@ client.on('message', (message) => {
 
     if (!args.length) {
       message.channel.send(
-        'Keine Stadt angegeben.\nBrauchst du Hilfe? ->' + prefix + 'help'
+        'No City specified.\n Need help? ->' + prefix + 'help'
       );
       return;
     }
@@ -148,7 +148,7 @@ client.on('message', (message) => {
       )
       .then((data) =>
         message.channel.send(
-          'Die Temperatur in ' + args + ' beträgt : ' + data.main.temp + '°C'
+          'The temperature in ' + args + ' is: ' + data.main.temp + '°C'
         )
       );
   }
