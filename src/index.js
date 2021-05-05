@@ -121,7 +121,10 @@ client.on('message', (message) => {
   }
 
   //Weather Command
-  if (message.content.startsWith(prefix + 'temperature')) {
+  if (
+    message.content.startsWith(prefix + 'temperature') ||
+    message.content.startsWith(prefix + 'temp')
+  ) {
     prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');
