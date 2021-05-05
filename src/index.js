@@ -6,19 +6,8 @@ const client = new Discord.Client();
 const fetch = require('node-fetch');
 const quotes = require('./quotes').quotes;
 
-let time;
-let date;
 let prefix = '.';
-
 let d = new Date();
-
-function getTime() {
-  time = d.toLocaleTimeString('de', { hour12: false });
-}
-
-function getDate() {
-  date = d.toLocaleDateString('de');
-}
 
 client.on('ready', () => {
   console.log('Bot logged in as ' + client.user.tag);
@@ -75,29 +64,29 @@ client.on('message', (message) => {
   }
 
   // Time command
-  setTimeout(function () {
-    if (message.content === prefix + 'time') {
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor('#1f5e87')
-        .setTitle(time);
+  if (message.content === prefix + 'time') {
+    const time = d.toLocaleTimeString('de', { hour12: false });
 
-      message.channel
-        .send(timeEmbed)
-        .then(() => console.log('Executed .time command'));
-    }
-  }, 1000);
+    let timeEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle(time);
+
+    message.channel
+      .send(timeEmbed)
+      .then(() => console.log('Executed .time command'));
+  }
 
   // Date command
-  function dateCommand() {
-    if (message.content === prefix + 'date') {
-      let dateEmbed = new Discord.MessageEmbed()
-        .setColor('#1f5e87')
-        .setTitle(date);
+  if (message.content === prefix + 'date') {
+    const date = d.toLocaleDateString('de');
 
-      message.channel
-        .send(dateEmbed)
-        .then(() => console.log('Executed .date command'));
-    }
+    let dateEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle(date);
+
+    message.channel
+      .send(dateEmbed)
+      .then(() => console.log('Executed .date command'));
   }
 
   // Dm command
