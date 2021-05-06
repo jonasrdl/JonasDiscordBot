@@ -14,7 +14,7 @@ Example:
   "api_token": "your-api-token"
 }
 ```
-The bot is not yet public. If the bot gets better (and useful :p), maybe I'll publish it.
+## The bot is not yet public. If the bot gets better (and useful :p), maybe I'll publish it.
 
 That was it! Any questions? feel free to contact me here:
 
