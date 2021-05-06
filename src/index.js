@@ -137,6 +137,14 @@ client.on('message', (message) => {
       return;
     }
 
+    for (let i = 0; args.length; i++) {
+      if (args[i].includes('ü', 'ä', 'ö')) {
+        message.channel.send('Stadt darf keine Umlaute enthalten!');
+
+        return;
+      }
+    }
+
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=' +
         args +
