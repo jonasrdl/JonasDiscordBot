@@ -6,8 +6,19 @@ const client = new Discord.Client();
 const fetch = require('node-fetch');
 const quotes = require('./quotes').quotes;
 
+let time;
+let date;
 let prefix = '.';
+
 let d = new Date();
+
+function getTime() {
+  time = d.toLocaleTimeString('de', { hour12: false });
+}
+
+function getDate() {
+  date = d.toLocaleDateString('de');
+}
 
 client.on('ready', () => {
   console.log('Bot logged in as ' + client.user.tag);
@@ -18,7 +29,7 @@ client.on('ready', () => {
 
 client.on('message', (message) => {
   if (message.content.startsWith('prefix')) {
-    message.channel.send('Aktueller Prefix: ' + prefix);
+    message.channel.send('Actual prefix: ' + prefix);
   }
 
   if (message.content.startsWith(prefix + 'prefix')) {
@@ -27,14 +38,14 @@ client.on('message', (message) => {
 
     if (!args.length) {
       message.channel.send(
-        'Keinen Prefix angegeben.\nBrauchst du Hilfe? ->' + prefix + 'help'
+        'No prefix given.\n Need help? ->' + prefix + 'help'
       );
       return;
     }
 
     prefix = args;
 
-    message.channel.send('Prefix geändert zu: ' + args);
+    message.channel.send('Prefix changed to: ' + args);
   }
 
   // Avatar command
@@ -64,35 +75,35 @@ client.on('message', (message) => {
   }
 
   // Time command
-  if (message.content === prefix + 'time') {
-    const time = d.toLocaleTimeString('de', { hour12: false });
+  setTimeout(function () {
+    if (message.content === prefix + 'time') {
+      let timeEmbed = new Discord.MessageEmbed()
+        .setColor('#1f5e87')
+        .setTitle(time);
 
-    let timeEmbed = new Discord.MessageEmbed()
-      .setColor('#1f5e87')
-      .setTitle(time);
-
-    message.channel
-      .send(timeEmbed)
-      .then(() => console.log('Executed .time command'));
-  }
+      message.channel
+        .send(timeEmbed)
+        .then(() => console.log('Executed .time command'));
+    }
+  }, 1000);
 
   // Date command
-  if (message.content === prefix + 'date') {
-    const date = d.toLocaleDateString('de');
+  function dateCommand() {
+    if (message.content === prefix + 'date') {
+      let dateEmbed = new Discord.MessageEmbed()
+        .setColor('#1f5e87')
+        .setTitle(date);
 
-    let dateEmbed = new Discord.MessageEmbed()
-      .setColor('#1f5e87')
-      .setTitle(date);
-
-    message.channel
-      .send(dateEmbed)
-      .then(() => console.log('Executed .date command'));
+      message.channel
+        .send(dateEmbed)
+        .then(() => console.log('Executed .date command'));
+    }
   }
 
   // Dm command
   if (message.content === prefix + 'dm') {
     message.author
-      .send('Hi! Ich bins, Jonas Bot :^)')
+      .send('Hi! Its me, Jonas Bot :^)')
       .then(() => console.log('Sent private Message'));
   }
 
@@ -110,7 +121,10 @@ client.on('message', (message) => {
   }
 
   //Weather Command
-  if (message.content.startsWith(prefix + 'temperature')) {
+  if (
+    message.content.startsWith(prefix + 'temperature') ||
+    message.content.startsWith(prefix + 'temp')
+  ) {
     prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');
@@ -118,9 +132,17 @@ client.on('message', (message) => {
 
     if (!args.length) {
       message.channel.send(
-        'Keine Stadt angegeben.\nBrauchst du Hilfe? ->' + prefix + 'help'
+        'No City specified.\n Need help? ->' + prefix + 'help'
       );
       return;
+    }
+
+    for (let i = 0; args.length; i++) {
+      if (args[i].includes('ü', 'ä', 'ö')) {
+        message.channel.send('Stadt darf keine Umlaute enthalten!');
+
+        return;
+      }
     }
 
     fetch(
@@ -137,7 +159,7 @@ client.on('message', (message) => {
       )
       .then((data) =>
         message.channel.send(
-          'Die Temperatur in ' + args + ' beträgt : ' + data.main.temp + '°C'
+          'The temperature in ' + args + ' is: ' + data.main.temp + '°C'
         )
       );
   }
