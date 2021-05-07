@@ -25,6 +25,8 @@ client.on('ready', () => {
   console.log(
     'The bot is currently on ' + client.guilds.cache.size + ' server(s)'
   );
+
+  client.user.setActivity('.help', { type: 'PLAYING' });
 });
 
 client.on('message', (message) => {
@@ -138,8 +140,12 @@ client.on('message', (message) => {
     }
 
     for (let i = 0; args.length; i++) {
-      if (args[i].includes('ü', 'ä', 'ö')) {
-        message.channel.send('Stadt darf keine Umlaute enthalten!');
+      if (
+        args[i].includes('ü') ||
+        args[i].includes('ö') ||
+        args[i].includes('ä')
+      ) {
+        message.channel.send('City is invalid, contains umlauts.');
 
         return;
       }
