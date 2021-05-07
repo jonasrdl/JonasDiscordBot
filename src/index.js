@@ -69,6 +69,13 @@ client.on('message', (message) => {
     if (!message.member.user.bot && message.guild) {
       if (message.mentions.users.first()) {
         let user = message.mentions.users.first();
+
+        if (message.mentions.has(client.user)) {
+          message.channel.send('Nice try! I can´t offend myself 😎');
+
+          return;
+        }
+
         message.channel
           .send(`${user}` + ' is stupid :^)')
           .then(() => console.log('.offend sent'));
