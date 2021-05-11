@@ -200,6 +200,7 @@ client.on('message', (message) => {
       .addField('.dm', 'Send yourself a private message', false)
       .addField('.quote', 'Get a random Quote', false)
       .addField('.temperature [City]', 'Get the temperature of any city', false)
+      .addField(prefix + 'author', 'https://github.com/jonasrdl', false)
       .setTimestamp();
 
     message.channel
