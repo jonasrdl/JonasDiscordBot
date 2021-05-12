@@ -196,6 +196,26 @@ client.on('message', (message) => {
       .then(() => console.log(prefix + 'author command executed'));
   }
 
+  //Info command
+  if (
+    message.content === prefix + 'info' &&
+    message.guild &&
+    !message.member.user.bot
+  ) {
+    let infoEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle('Information')
+      .addField('Project start', '1. March 2021', false)
+      .addField('Serious project?', 'No, obv its fun.', false)
+      .addField('Need help?', prefix + 'help', false)
+      .addField('Who made me?', prefix + 'author', false)
+      .setTimestamp();
+
+    message.channel
+      .send(infoEmbed)
+      .then(() => console.log(prefix + 'info command executed'));
+  }
+
   //Help command
   if (
     message.content === prefix + 'help' &&
