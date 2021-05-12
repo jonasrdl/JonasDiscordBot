@@ -232,14 +232,19 @@ client.on('message', (message) => {
       )
       .setDescription('Help')
       .addField(prefix + 'prefix [prefix]', 'Change Prefix', false)
-      .addField('.offend @[Username]', 'Offend someone', false)
-      .addField('.avatar @[Username]', 'Get a users avatar', false)
-      .addField('.time', 'Get the current Time', false)
-      .addField('.date', 'Get the current Date', false)
-      .addField('.dm', 'Send yourself a private message', false)
-      .addField('.quote', 'Get a random Quote', false)
-      .addField('.temperature [City]', 'Get the temperature of any city', false)
-      .addField('.author', 'Infos about the author', false)
+      .addField(prefix + 'offend @[Username]', 'Offend someone', false)
+      .addField(prefix + 'avatar @[Username]', 'Get a users avatar', false)
+      .addField(prefix + 'time', 'Get the current Time', false)
+      .addField(prefix + 'date', 'Get the current Date', false)
+      .addField(prefix + 'dm', 'Send yourself a private message', false)
+      .addField(prefix + 'quote', 'Get a random Quote', false)
+      .addField(
+        prefix + 'temperature [City]',
+        'Get the temperature of any city',
+        false
+      )
+      .addField(prefix + 'author', 'Infos about the author', false)
+      .addField(prefix + 'info', 'General info about the Bot', false)
       .setTimestamp();
 
     message.channel
