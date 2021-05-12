@@ -50,7 +50,7 @@ client.on('message', (message) => {
     message.channel.send('Prefix changed to: ' + args);
   }
 
-  // Avatar command
+  //Avatar command
   if (message.content.startsWith(prefix + 'avatar')) {
     if (message.mentions.users.first()) {
       let user = message.mentions.users.first();
@@ -64,7 +64,7 @@ client.on('message', (message) => {
     }
   }
 
-  // Offend command
+  //Offend command
   if (message.content.startsWith(prefix + 'offend')) {
     if (!message.member.user.bot && message.guild) {
       if (message.mentions.users.first()) {
@@ -83,7 +83,7 @@ client.on('message', (message) => {
     }
   }
 
-  // Time command
+  //Time command
   setTimeout(function () {
     if (message.content === prefix + 'time') {
       let timeEmbed = new Discord.MessageEmbed()
@@ -96,7 +96,7 @@ client.on('message', (message) => {
     }
   }, 1000);
 
-  // Date command
+  //Date command
   function dateCommand() {
     if (message.content === prefix + 'date') {
       let dateEmbed = new Discord.MessageEmbed()
@@ -109,14 +109,14 @@ client.on('message', (message) => {
     }
   }
 
-  // Dm command
+  //Dm command
   if (message.content === prefix + 'dm') {
     message.author
       .send('Hi! Its me, Jonas Bot :^)')
       .then(() => console.log('Sent private Message'));
   }
 
-  // Quote Command
+  //Quote command
   if (message.content === prefix + 'quote') {
     const randomQuote = Math.floor(Math.random() * quotes.length);
 
@@ -129,7 +129,7 @@ client.on('message', (message) => {
       .then(() => console.log('Executed .quote command'));
   }
 
-  //Weather Command
+  //Temperature command
   if (
     message.content.startsWith(prefix + 'temperature') ||
     message.content.startsWith(prefix + 'temp')
@@ -177,7 +177,26 @@ client.on('message', (message) => {
       );
   }
 
-  // Help Embed command
+  //Author command
+  if (
+    message.content === prefix + 'author' &&
+    message.guild &&
+    !message.member.user.bot
+  ) {
+    let authorEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle('Reach me on: ')
+      .addField('Github', 'https://github.com/jonasrdl', false)
+      .addField('Website', 'https://jonasriedel.com', false)
+      .addField('Twitter', 'https://twitter.com/jvnxs7', false)
+      .setTimestamp();
+
+    message.channel
+      .send(authorEmbed)
+      .then(() => console.log(prefix + 'author command executed'));
+  }
+
+  //Help command
   if (
     message.content === prefix + 'help' &&
     message.guild &&
@@ -200,6 +219,7 @@ client.on('message', (message) => {
       .addField('.dm', 'Send yourself a private message', false)
       .addField('.quote', 'Get a random Quote', false)
       .addField('.temperature [City]', 'Get the temperature of any city', false)
+      .addField('.author', 'Infos about the author', false)
       .setTimestamp();
 
     message.channel
