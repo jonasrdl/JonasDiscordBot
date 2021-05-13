@@ -22,6 +22,24 @@ function getDate() {
   date = d.toLocaleDateString('de');
 }
 
+function uptime() {
+  let days = Math.floor(client.uptime / 86400000);
+  let hours = Math.floor(client.uptime / 3600000) % 24;
+  let minutes = Math.floor(client.uptime / 60000) % 60;
+  let seconds = Math.floor(client.uptime / 1000) % 60;
+
+  return (
+    days +
+    ' Days, ' +
+    hours +
+    ' Hours, ' +
+    minutes +
+    ' Minutes, ' +
+    seconds +
+    ' Seconds'
+  );
+}
+
 client.on('ready', () => {
   console.log('Bot logged in as ' + client.user.tag);
   console.log(
@@ -211,6 +229,7 @@ client.on('message', (message) => {
       .addField('Serious project?', 'No, obv its fun.', false)
       .addField('Need help?', prefix + 'help', false)
       .addField('Who made me?', prefix + 'author', false)
+      .addField('Uptime', uptime(), false)
       .setTimestamp();
 
     message.channel
@@ -218,6 +237,7 @@ client.on('message', (message) => {
       .then(() => console.log(prefix + 'info command executed'));
   }
 
+  //Nickname command
   if (message.content === prefix + 'nickname') {
     const userId = config.userId;
     const target = client.users.cache.find((user) => user.id === userId);
