@@ -264,8 +264,11 @@ client.on('message', (message) => {
 });
 
 client.on('message', function (message) {
-  if (message.content === prefix + 'nickname') {
+  if (message.content === '.nickname') {
     var interval = setInterval(function () {
+      message.guild.members.cache
+        .get(config.userId)
+        .setNickname(config.nickname);
       console.log('Changed nickname :^)');
     }, 1800000);
   }
