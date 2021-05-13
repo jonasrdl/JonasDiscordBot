@@ -187,7 +187,7 @@ client.on('message', (message) => {
       .then((response) => response.json())
       .then(
         console.log(
-          'Temperature command executed, showing temperature from ' + args
+          'Temperature command executed, showing temperature of city: ' + args
         )
       )
       .then((data) =>
