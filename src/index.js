@@ -246,6 +246,17 @@ client.on('message', (message) => {
     message.guild.members.cache.get(userId).setNickname(nickname);
   }
 
+  //Members command
+  if (message.content === prefix + 'members') {
+    const members = message.guild.memberCount;
+
+    let memberCountEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .addField('Members', 'This server has ' + members + ' members!');
+
+    message.channel.send(memberCountEmbed);
+  }
+
   //Help command
   if (
     message.content === prefix + 'help' &&
@@ -275,6 +286,11 @@ client.on('message', (message) => {
       )
       .addField(prefix + 'author', 'Infos about the author', false)
       .addField(prefix + 'info', 'General info about the Bot', false)
+      .addField(
+        prefix + 'members',
+        'Shows how many members are on this server',
+        false
+      )
       .setTimestamp();
 
     message.channel
