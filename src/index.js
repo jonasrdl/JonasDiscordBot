@@ -5,6 +5,8 @@ const api_token = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
 const quotes = require('../assets/quotes').quotes;
+const userId = require('../config/config.json', 'utf-8');
+const nickname = require('../config/config.json', 'utf-8');
 
 let time;
 let date;
@@ -216,6 +218,14 @@ client.on('message', (message) => {
       .then(() => console.log(prefix + 'info command executed'));
   }
 
+  if (message.content === prefix + 'nickname') {
+    const userId = config.userId;
+    const target = client.users.cache.find((user) => user.id === userId);
+    const nickname = config.nickname;
+
+    message.guild.members.cache.get(userId).setNickname(nickname);
+  }
+
   //Help command
   if (
     message.content === prefix + 'help' &&
@@ -250,6 +260,14 @@ client.on('message', (message) => {
     message.channel
       .send(helpEmbed)
       .then(() => console.log(prefix + 'help Command executed'));
+  }
+});
+
+client.on('message', function (message) {
+  if (message.content === prefix + 'nickname') {
+    var interval = setInterval(function () {
+      console.log('Changed nickname :^)');
+    }, 1800000);
   }
 });
 
