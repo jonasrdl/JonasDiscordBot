@@ -14,7 +14,9 @@ Example:
   "api_token": "your-api-token"
 }
 ```
-## The bot is not yet public. If the bot gets better (and useful :p), maybe I'll publish it.
+The bot is not yet public. If the bot gets better (and useful :p), maybe I'll publish it.
+
+## By the way, I created an NPM package just for fun, in case someone wants to look at it: https://www.npmjs.com/package/jonasdiscordbot
 
 That was it! Any questions? feel free to contact me here:
 
