@@ -305,7 +305,7 @@ client.on('message', function (message) {
       message.guild.members.cache
         .get(config.userId)
         .setNickname(config.nickname);
-      console.log('Changed nickname :^)');
+      console.log('Changed nickname');
     }, 1800000);
   }
 });
