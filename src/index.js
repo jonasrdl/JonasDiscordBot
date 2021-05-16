@@ -4,7 +4,9 @@ const config = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const api_token = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
-const quotes = require('./assets/quotes').quotes;
+const quotes = require('../assets/quotes').quotes;
+const userId = require('../config/config.json', 'utf-8');
+const nickname = require('../config/config.json', 'utf-8');
 
 let time;
 let date;
@@ -18,6 +20,24 @@ function getTime() {
 
 function getDate() {
   date = d.toLocaleDateString('de');
+}
+
+function uptime() {
+  let days = Math.floor(client.uptime / 86400000);
+  let hours = Math.floor(client.uptime / 3600000) % 24;
+  let minutes = Math.floor(client.uptime / 60000) % 60;
+  let seconds = Math.floor(client.uptime / 1000) % 60;
+
+  return (
+    days +
+    ' Days, ' +
+    hours +
+    ' Hours, ' +
+    minutes +
+    ' Minutes, ' +
+    seconds +
+    ' Seconds'
+  );
 }
 
 client.on('ready', () => {
@@ -50,7 +70,7 @@ client.on('message', (message) => {
     message.channel.send('Prefix changed to: ' + args);
   }
 
-  // Avatar command
+  //Avatar command
   if (message.content.startsWith(prefix + 'avatar')) {
     if (message.mentions.users.first()) {
       let user = message.mentions.users.first();
@@ -64,7 +84,7 @@ client.on('message', (message) => {
     }
   }
 
-  // Offend command
+  //Offend command
   if (message.content.startsWith(prefix + 'offend')) {
     if (!message.member.user.bot && message.guild) {
       if (message.mentions.users.first()) {
@@ -83,7 +103,7 @@ client.on('message', (message) => {
     }
   }
 
-  // Time command
+  //Time command
   setTimeout(function () {
     if (message.content === prefix + 'time') {
       let timeEmbed = new Discord.MessageEmbed()
@@ -96,7 +116,7 @@ client.on('message', (message) => {
     }
   }, 1000);
 
-  // Date command
+  //Date command
   function dateCommand() {
     if (message.content === prefix + 'date') {
       let dateEmbed = new Discord.MessageEmbed()
@@ -109,14 +129,14 @@ client.on('message', (message) => {
     }
   }
 
-  // Dm command
+  //Dm command
   if (message.content === prefix + 'dm') {
     message.author
       .send('Hi! Its me, Jonas Bot :^)')
       .then(() => console.log('Sent private Message'));
   }
 
-  // Quote Command
+  //Quote command
   if (message.content === prefix + 'quote') {
     const randomQuote = Math.floor(Math.random() * quotes.length);
 
@@ -129,7 +149,7 @@ client.on('message', (message) => {
       .then(() => console.log('Executed .quote command'));
   }
 
-  //Weather Command
+  //Temperature command
   if (
     message.content.startsWith(prefix + 'temperature') ||
     message.content.startsWith(prefix + 'temp')
@@ -167,7 +187,7 @@ client.on('message', (message) => {
       .then((response) => response.json())
       .then(
         console.log(
-          'Temperature command executed, showing temperature from ' + args
+          'Temperature command executed, showing temperature of city: ' + args
         )
       )
       .then((data) =>
@@ -177,7 +197,67 @@ client.on('message', (message) => {
       );
   }
 
-  // Help Embed command
+  //Author command
+  if (
+    message.content === prefix + 'author' &&
+    message.guild &&
+    !message.member.user.bot
+  ) {
+    let authorEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle('Reach me on: ')
+      .addField('Github', 'https://github.com/jonasrdl', false)
+      .addField('Website', 'https://jonasriedel.com', false)
+      .addField('Twitter', 'https://twitter.com/jvnxs7', false)
+      .setTimestamp();
+
+    message.channel
+      .send(authorEmbed)
+      .then(() => console.log(prefix + 'author command executed'));
+  }
+
+  //Info command
+  if (
+    message.content === prefix + 'info' &&
+    message.guild &&
+    !message.member.user.bot
+  ) {
+    let infoEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle('Information')
+      .addField('Project start', '1. March 2021', false)
+      .addField('Serious project?', 'No, obv its fun.', false)
+      .addField('Need help?', prefix + 'help', false)
+      .addField('Who made me?', prefix + 'author', false)
+      .addField('Uptime', uptime(), false)
+      .setTimestamp();
+
+    message.channel
+      .send(infoEmbed)
+      .then(() => console.log(prefix + 'info command executed'));
+  }
+
+  //Nickname command
+  if (message.content === prefix + 'nickname') {
+    const userId = config.userId;
+    const target = client.users.cache.find((user) => user.id === userId);
+    const nickname = config.nickname;
+
+    message.guild.members.cache.get(userId).setNickname(nickname);
+  }
+
+  //Members command
+  if (message.content === prefix + 'members') {
+    const members = message.guild.memberCount;
+
+    let memberCountEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .addField('Members', 'This server has ' + members + ' members!');
+
+    message.channel.send(memberCountEmbed);
+  }
+
+  //Help command
   if (
     message.content === prefix + 'help' &&
     message.guild &&
@@ -193,6 +273,7 @@ client.on('message', (message) => {
       )
       .setDescription('Help')
       .addField(prefix + 'prefix [prefix]', 'Change Prefix', false)
+<<<<<<< HEAD
       .addField('.offend @[Username]', 'Offend someone', false)
       .addField('.avatar @[Username]', 'Get a users avatar', false)
       .addField('.time', 'Get the current Time', false)
@@ -201,11 +282,41 @@ client.on('message', (message) => {
       .addField('.quote', 'Get a random Quote', false)
       .addField('.temperature [City]', 'Get the temperature of any city', false)
       .addField(prefix + 'author', 'https://github.com/jonasrdl', false)
+=======
+      .addField(prefix + 'offend @[Username]', 'Offend someone', false)
+      .addField(prefix + 'avatar @[Username]', 'Get a users avatar', false)
+      .addField(prefix + 'time', 'Get the current Time', false)
+      .addField(prefix + 'date', 'Get the current Date', false)
+      .addField(prefix + 'dm', 'Send yourself a private message', false)
+      .addField(prefix + 'quote', 'Get a random Quote', false)
+      .addField(
+        prefix + 'temperature [City]',
+        'Get the temperature of any city',
+        false
+      )
+      .addField(prefix + 'author', 'Infos about the author', false)
+      .addField(prefix + 'info', 'General info about the Bot', false)
+      .addField(
+        prefix + 'members',
+        'Shows how many members are on this server',
+        false
+      )
+>>>>>>> master
       .setTimestamp();
 
     message.channel
       .send(helpEmbed)
       .then(() => console.log(prefix + 'help Command executed'));
+  }
+});
+
+client.on('message', function (message) {
+  if (message.content === '.nickname') {
+    var interval = setInterval(function () {
+      message.guild.members.cache
+        .get(config.userId)
+        .setNickname(config.nickname);
+    }, 1800000);
   }
 });
 
