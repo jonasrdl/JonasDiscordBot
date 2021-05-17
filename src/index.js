@@ -4,8 +4,6 @@ const config = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const api_token = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const client = new Discord.Client();
 const fetch = require('node-fetch');
-const userId = require('../config/config.json', 'utf-8');
-const nickname = require('../config/config.json', 'utf-8');
 const prefix = '.';
 
 client.commands = new Discord.Collection();
