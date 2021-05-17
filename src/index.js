@@ -8,18 +8,14 @@ const quotes = require('../assets/quotes').quotes;
 const userId = require('../config/config.json', 'utf-8');
 const nickname = require('../config/config.json', 'utf-8');
 
-let time;
-let date;
 let prefix = '.';
 
-let d = new Date();
-
 function getTime() {
-  time = d.toLocaleTimeString('de', { hour12: false });
+  return new Date().toLocaleTimeString('de', { hour12: false });
 }
 
 function getDate() {
-  date = d.toLocaleDateString('de');
+  return new Date().toLocaleDateString('de');
 }
 
 function uptime() {
@@ -104,29 +100,25 @@ client.on('message', (message) => {
   }
 
   //Time command
-  setTimeout(function () {
-    if (message.content === prefix + 'time') {
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor('#1f5e87')
-        .setTitle(time);
+  if (message.content === prefix + 'time') {
+    let timeEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle(getTime());
 
-      message.channel
-        .send(timeEmbed)
-        .then(() => console.log('Executed .time command'));
-    }
-  }, 1000);
+    message.channel
+      .send(timeEmbed)
+      .then(() => console.log('Executed .time command'));
+  }
 
   //Date command
-  function dateCommand() {
-    if (message.content === prefix + 'date') {
-      let dateEmbed = new Discord.MessageEmbed()
-        .setColor('#1f5e87')
-        .setTitle(date);
+  if (message.content === prefix + 'date') {
+    let dateEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle(getDate());
 
-      message.channel
-        .send(dateEmbed)
-        .then(() => console.log('Executed .date command'));
-    }
+    message.channel
+      .send(dateEmbed)
+      .then(() => console.log('Executed .date command'));
   }
 
   //Dm command
