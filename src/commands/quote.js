@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const quotes = [
   'Any time you try to create an Internet meme, automatic fail. Thats like the worst thing you can do.',
   'I feel in todays time, you are truly successful if a meme is based on you.',
@@ -9,4 +10,16 @@ const quotes = [
   'I run a meme type of account on Twitter; I know what my audience is looking for.',
 ];
 
-exports.quotes = quotes;
+module.exports = {
+  name: 'quote',
+  description: 'Get a random Quote',
+  execute(message, args) {
+    const randomQuote = Math.floor(Math.random() * quotes.length);
+
+    let quoteEmbed = new Discord.MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle(quotes[randomQuote]);
+
+    message.channel.send(quoteEmbed);
+  },
+};
