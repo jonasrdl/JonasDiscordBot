@@ -273,7 +273,6 @@ client.on('message', (message) => {
       )
       .setDescription('Help')
       .addField(prefix + 'prefix [prefix]', 'Change Prefix', false)
-<<<<<<< HEAD
       .addField('.offend @[Username]', 'Offend someone', false)
       .addField('.avatar @[Username]', 'Get a users avatar', false)
       .addField('.time', 'Get the current Time', false)
@@ -282,7 +281,6 @@ client.on('message', (message) => {
       .addField('.quote', 'Get a random Quote', false)
       .addField('.temperature [City]', 'Get the temperature of any city', false)
       .addField(prefix + 'author', 'https://github.com/jonasrdl', false)
-=======
       .addField(prefix + 'offend @[Username]', 'Offend someone', false)
       .addField(prefix + 'avatar @[Username]', 'Get a users avatar', false)
       .addField(prefix + 'time', 'Get the current Time', false)
@@ -301,7 +299,6 @@ client.on('message', (message) => {
         'Shows how many members are on this server',
         false
       )
->>>>>>> master
       .setTimestamp();
 
     message.channel
