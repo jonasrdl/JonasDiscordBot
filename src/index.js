@@ -229,15 +229,6 @@ client.on('message', (message) => {
       .then(() => console.log(prefix + 'info command executed'));
   }
 
-  //Nickname command
-  if (message.content === prefix + 'nickname') {
-    const userId = config.userId;
-    const target = client.users.cache.find((user) => user.id === userId);
-    const nickname = config.nickname;
-
-    message.guild.members.cache.get(userId).setNickname(nickname);
-  }
-
   //Members command
   if (message.content === prefix + 'members') {
     const members = message.guild.memberCount;
@@ -288,16 +279,6 @@ client.on('message', (message) => {
     message.channel
       .send(helpEmbed)
       .then(() => console.log(prefix + 'help Command executed'));
-  }
-});
-
-client.on('message', function (message) {
-  if (message.content === '.nickname') {
-    var interval = setInterval(function () {
-      message.guild.members.cache
-        .get(config.userId)
-        .setNickname(config.nickname);
-    }, 1800000);
   }
 });
 
