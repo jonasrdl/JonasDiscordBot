@@ -1,9 +1,7 @@
-const Discord = require('discord.js');
-
 module.exports = {
   name: 'author',
   description: 'Infos about the author',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     let authorEmbed = new Discord.MessageEmbed()
       .setColor('#1f5e87')
       .setTitle('Reach me on: ')

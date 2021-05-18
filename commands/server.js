@@ -4,7 +4,7 @@ const client = new Discord.Client();
 module.exports = {
   name: 'server',
   description: 'Info about the Server',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     const icon = message.guild.displayAvatarURL;
 
     let serverEmbed = new Discord.MessageEmbed()

@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'avatar',
   description: 'Get a users avatar',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     if (message.mentions.users.first()) {
       let user = message.mentions.users.first();
       let attachment = new Discord.MessageAttachment(user.avatarURL());

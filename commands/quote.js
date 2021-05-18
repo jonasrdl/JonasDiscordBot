@@ -13,7 +13,7 @@ const quotes = [
 module.exports = {
   name: 'quote',
   description: 'Get a random Quote',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     const randomQuote = Math.floor(Math.random() * quotes.length);
 
     let quoteEmbed = new Discord.MessageEmbed()

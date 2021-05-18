@@ -4,7 +4,7 @@ let prefix = '.';
 module.exports = {
   name: 'help',
   description: 'Help',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     let helpEmbed = new Discord.MessageEmbed()
       .setColor('#1f5e87')
       .setTitle('Author')

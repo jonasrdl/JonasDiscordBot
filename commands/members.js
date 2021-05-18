@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'members',
   description: 'Shows how many members are on this server',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     const members = message.guild.memberCount;
 
     let memberCountEmbed = new Discord.MessageEmbed()

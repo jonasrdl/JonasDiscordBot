@@ -1,14 +1,14 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch');
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
-const api_token = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
+const config = JSON.parse(fs.readFileSync('./config/config.json', 'utf-8'));
+const api_token = JSON.parse(fs.readFileSync('./config/config.json', 'utf-8'));
 let prefix = '.';
 
 module.exports = {
   name: 'temperature',
   description: 'Get the temperature of any city',
-  execute(message) {
+  execute(client, message, Discord) {
     prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');

@@ -23,7 +23,7 @@ function uptime() {
 module.exports = {
   name: 'info',
   description: 'General info about the Bot',
-  execute(message, args) {
+  execute(client, message, args, Discord) {
     let infoEmbed = new Discord.MessageEmbed()
       .setColor('#1f5e87')
       .setTitle('Information')
