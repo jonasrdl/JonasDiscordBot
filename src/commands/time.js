@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-function getTime() {
+function time() {
   return new Date().toLocaleTimeString('de', { hour12: false });
 }
 
@@ -10,7 +10,7 @@ module.exports = {
   execute(message, args) {
     let timeEmbed = new Discord.MessageEmbed()
       .setColor('#1f5e87')
-      .setTitle(getTime());
+      .setTitle(time());
 
     message.channel.send(timeEmbed);
   },
