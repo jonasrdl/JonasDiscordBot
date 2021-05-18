@@ -56,6 +56,8 @@ client.on('message', (message) => {
     client.commands.get('info').execute(message, args);
   } else if (command === 'members') {
     client.commands.get('members').execute(message, args);
+  } else if (command === 'server') {
+    client.commands.get('server').execute(message, args);
   }
 });
 
