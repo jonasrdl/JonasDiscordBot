@@ -21,18 +21,6 @@ module.exports = {
       return;
     }
 
-    /* for (let i = 0; args.length; i++) {
-      if (
-        args[i].includes('ü') ||
-        args[i].includes('ö') ||
-        args[i].includes('ä')
-      ) {
-        message.channel.send('City is invalid, contains umlauts.');
-
-        return;
-      }
-    } */
-
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=' +
         args +
