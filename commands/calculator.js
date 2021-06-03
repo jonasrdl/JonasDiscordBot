@@ -24,7 +24,7 @@ module.exports = {
       message.channel.send('Result: ' + result);
     } else if (operator === '/') {
       if (Number(number2) === 0) {
-        message.channel.send('Division by 0 is not allowed!');
+        message.channel.send('Division by 0 is not allowed!' + ' 🧠🤓');
         return;
       }
 
