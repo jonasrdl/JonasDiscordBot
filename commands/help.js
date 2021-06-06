@@ -33,6 +33,7 @@ module.exports = {
         'Shows how many members are on this server',
         false
       )
+      .addField(prefix + 'calculator', 'Calculate two numbers')
       .setTimestamp();
 
     message.channel.send(helpEmbed);
