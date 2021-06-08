@@ -10,4 +10,6 @@ client.events = new Discord.Collection();
   require(`./handlers/${handler}`)(client, Discord);
 });
 
-client.login(config.token);
+do {
+  client.login(config.token).then(r => console.log('Token: ' + r + ' is valid.'));
+} while (config.token ? console.log('Token is valid and existing.') : console.log('Token is invalid or not existing'))
