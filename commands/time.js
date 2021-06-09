@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 function time() {
-  return new Date().toLocaleTimeString('de', { hour12: false });
+  return new Date().toLocaleTimeString('de', {hour12: false});
 }
 
 module.exports = {

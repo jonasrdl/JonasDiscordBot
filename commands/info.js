@@ -21,13 +21,13 @@ module.exports = {
       .addField(
         'Uptime',
         days +
-          ' Days, ' +
-          hours +
-          ' Hours, ' +
-          minutes +
-          ' Minutes, ' +
-          seconds +
-          ' Seconds',
+        ' Days, ' +
+        hours +
+        ' Hours, ' +
+        minutes +
+        ' Minutes, ' +
+        seconds +
+        ' Seconds',
         false
       )
       .setTimestamp();
