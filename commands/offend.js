@@ -10,8 +10,7 @@ module.exports = {
         let user = message.mentions.users.first();
 
         message.channel
-          .send(`${user}` + ' is stupid :^)')
-          .then(() => console.log('.offend sent'));
+          .send(`${user}` + ' is stupid :^)');
       }
     }
   },
