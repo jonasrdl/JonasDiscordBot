@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 let prefix = '.';
 
 module.exports = {

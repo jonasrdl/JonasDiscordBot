@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const quotes = [
   'Any time you try to create an Internet meme, automatic fail. Thats like the worst thing you can do.',
   'I feel in todays time, you are truly successful if a meme is based on you.',

@@ -8,7 +8,7 @@ let prefix = '.';
 module.exports = {
   name: 'temperature',
   description: 'Get the temperature of any city',
-  execute(client, message, Discord) {
+  execute(client, message) {
     prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');
@@ -28,11 +28,6 @@ module.exports = {
       config.api_token
     )
       .then((response) => response.json())
-      .then(
-        console.log(
-          'Temperature command executed, showing temperature of city: ' + args
-        )
-      )
       .then((data) =>
         message.channel.send(
           'The temperature in ' + args + ' is: ' + data.main.temp + '°C'

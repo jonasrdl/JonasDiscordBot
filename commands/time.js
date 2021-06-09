@@ -12,6 +12,6 @@ module.exports = {
       .setColor('#1f5e87')
       .setTitle(time());
 
-    message.channel.send(timeEmbed);
+    message.channel.send(timeEmbed)
   },
 };

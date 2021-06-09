@@ -1,8 +1,8 @@
 module.exports = {
   name: 'calculator',
   description: 'Calculates two numbers',
-  execute(client, message, Discord) {
-    prefix = '.';
+  execute(client, message) {
+    let prefix = '.';
 
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
@@ -11,7 +11,7 @@ module.exports = {
     const operator = args[1];
     const number2 = Number(args[2]);
 
-    if (number1 === NaN || number2 === NaN) {
+    if (isNaN(number1) || isNaN(number2)) {
       message.channel.send('Invalid input, try again.');
 
       return;

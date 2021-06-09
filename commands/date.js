@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 function date() {
   return new Date().toLocaleDateString('de');
 }
