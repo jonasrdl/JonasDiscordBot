@@ -10,6 +10,6 @@ module.exports = {
       .addField('Twitter', 'https://twitter.com/jvnxs7', false)
       .setTimestamp();
 
-    message.channel.send(authorEmbed);
+    message.channel.send(authorEmbed).then(() => console.log('Author embed sent'));
   },
 };
