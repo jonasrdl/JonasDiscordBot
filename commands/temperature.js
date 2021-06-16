@@ -25,8 +25,16 @@ module.exports = {
       return;
     }
 
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + args + '&units=metric&appid=' + config.api_token)
-        .then((response) => response.json())
-        .then((data) => message.channel.send('The temperature in ' + args + ' is: ' + data.main.temp + '°C'));
+    const sendMessage = (data) => {
+      if (data.main.temp >= 30) {
+        message.channel.send(`The temperature in ${args} is: ${data.main.temp}°C, Its very hot :D`)
+      } else {
+        message.channel.send(`The temperature in ${args} is: ${data.main.temp}°C`)
+      }
+    }
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${args}&units=metric&appid=${config.api_token}`)
+      .then((response) => response.json())
+      .then((data) => sendMessage(data))
   }
 };
