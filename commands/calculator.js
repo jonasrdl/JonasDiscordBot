@@ -12,7 +12,7 @@ module.exports = {
     const number2 = Number(args[2]);
 
     if (isNaN(number1) || isNaN(number2)) {
-      message.channel.send('Invalid input, try again.');
+      message.channel.send('Invalid input, try again.').then(() => console.log('Sent error'));
 
       return;
     }

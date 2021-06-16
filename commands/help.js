@@ -38,6 +38,6 @@ module.exports = {
       )
       .setTimestamp();
 
-    message.channel.send(helpEmbed);
+    message.channel.send(helpEmbed).then(() => console.log('Sent help embed.'));
   },
 };
