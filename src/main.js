@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('./config/config.json', 'utf-8'));
+const config = JSON.parse(fs.readFileSync('../config/config.json', 'utf-8'));
 const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
