@@ -6,8 +6,7 @@ module.exports = {
       if (message.mentions.users.first()) {
         let user = message.mentions.users.first();
 
-        message.channel
-          .send(`${user}` + ' is stupid :^)');
+        message.channel.send(`${user}` + ' is stupid :^)');
       }
     }
   },

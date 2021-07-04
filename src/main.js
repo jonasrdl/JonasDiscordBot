@@ -11,5 +11,5 @@ client.events = new Discord.Collection();
 });
 
 do {
-  client.login(config.token).then(r => console.log('Token: ' + r + ' is valid.'));
-} while (config.token ? console.log('Token is valid and existing.') : console.log('Token is invalid or not existing'))
+  client.login(config.token).then((r) => console.log('Token: ' + r + ' is valid.'));
+} while (config.token ? console.log('Token is valid and existing.') : console.log('Token is invalid or not existing'));

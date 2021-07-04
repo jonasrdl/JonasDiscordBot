@@ -16,18 +16,7 @@ module.exports = {
       .addField('Serious project?', 'No, obv its fun.', false)
       .addField('Need help?', prefix + 'help', false)
       .addField('Who made me?', prefix + 'author', false)
-      .addField(
-        'Uptime',
-        days +
-        ' Days, ' +
-        hours +
-        ' Hours, ' +
-        minutes +
-        ' Minutes, ' +
-        seconds +
-        ' Seconds',
-        false
-      )
+      .addField('Uptime', days + ' Days, ' + hours + ' Hours, ' + minutes + ' Minutes, ' + seconds + ' Seconds', false)
       .setTimestamp();
 
     message.channel.send(infoEmbed);

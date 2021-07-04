@@ -6,7 +6,6 @@ module.exports = {
 
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
-
     const number1 = Number(args[0]);
     const operator = args[1];
     const number2 = Number(args[2]);
@@ -18,9 +17,11 @@ module.exports = {
     }
     if (operator === '+') {
       const result = Number(number1) + Number(number2);
+
       message.channel.send('Result: ' + result);
     } else if (operator === '-') {
       const result = Number(number1) - Number(number2);
+
       message.channel.send('Result: ' + result);
     } else if (operator === '/') {
       if (Number(number2) === 0) {
