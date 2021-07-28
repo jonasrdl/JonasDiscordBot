@@ -1,5 +1,7 @@
 # JonasDiscordBot
 
+<img alt="GitHub" src="https://img.shields.io/github/license/jonasrdl/JonasDiscordBot">
+
 ### I am giving you permission to use the code for your own project. If you do please mention me somehow.
 
 If you want to use your own token, create a file called "config.json" and enter the token like this: {"token": "your token"}.
