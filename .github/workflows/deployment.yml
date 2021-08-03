@@ -1,0 +1,29 @@
+name: Deploymeny (dev)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deployment (dev)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: copy files to server
+        uses: appleboy/scp-action@master
+        with:
+          HOST: ${{secrets.HOST}}
+          PORT: ${{secrets.PORT}}
+          USERNAME: ${{secrets.USERNAME}}
+          password: ${{secrets.PASSWORD}}
+          target: ${{secrets.target}}
+          source: './*'
