@@ -6,7 +6,7 @@ module.exports = {
       let user = message.mentions.users.first();
       let attachment = new Discord.MessageAttachment(user.avatarURL());
 
-      message.reply(attachment).then(() => console.log('Attachment sent'));
+      message.reply(attachment).then(() => console.log('Avatar picture sent'));
     } else {
       let attachment = new Discord.MessageAttachment(message.member.user.avatarURL());
 
