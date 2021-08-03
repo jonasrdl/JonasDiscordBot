@@ -1,6 +1,6 @@
 # JonasDiscordBot
 
-<img alt="GitHub" src="https://img.shields.io/github/license/jonasrdl/JonasDiscordBot"> <img alt="npm" src="https://img.shields.io/npm/v/jonasdiscordbot"> <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/jonasrdl/JonasDiscordBot"> <img alt="npm" src="https://img.shields.io/npm/dt/jonasdiscordbot">
+<img alt="GitHub" src="https://img.shields.io/github/license/jonasrdl/JonasDiscordBot"> <img alt="npm" src="https://img.shields.io/npm/v/jonasdiscordbot"> <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/jonasrdl/JonasDiscordBot"> <img alt="npm" src="https://img.shields.io/npm/dt/jonasdiscordbot"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/jonasrdl/JonasDiscordBot/Deploymeny%20(dev)">
 
 ### I am giving you permission to use the code for your own project. If you do please mention me somehow.
 
