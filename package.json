@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Jonas",
@@ -13,5 +13,10 @@
     "axios": "^0.21.1",
     "discord.js": "^12.5.1",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "jest-discord": "^0.1.0",
+    "jest-environment-discord": "^0.1.0"
   }
 }
