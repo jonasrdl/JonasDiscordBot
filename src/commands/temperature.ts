@@ -4,7 +4,7 @@ module.exports = {
   name: 'temperature',
   description: 'Get the temperature of any city',
   execute(client, message) {
-    const config: any = JSON.parse(fs.readFileSync('./config/config.json', 'utf-8'));
+    const config: any = JSON.parse(fs.readFileSync('../../../config/config.json', 'utf-8'));
     const args: any = message.content.slice(prefix.length).trim().split(' ');
     const command: any = args.shift().toLowerCase();
 
