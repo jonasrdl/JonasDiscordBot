@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "compile-ts": "npx tsc *.ts --outDir /src/commands",
+    "compile": "npx tsc",
     "test": "jest"
   },
   "keywords": [],
