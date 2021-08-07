@@ -13,7 +13,7 @@ module.exports = {
       .setColor('#1f5e87')
       .setTitle('Information')
       .addField('Project start', '1. March 2021', false)
-      .addField('Serious project?', 'No, obv its fun.', false)
+      .addField('Serious project?', 'Coming soon :^)', false)
       .addField('Need help?', prefix + 'help', false)
       .addField('Who made me?', prefix + 'author', false)
       .addField('Uptime', days + ' Days, ' + hours + ' Hours, ' + minutes + ' Minutes, ' + seconds + ' Seconds', false)
