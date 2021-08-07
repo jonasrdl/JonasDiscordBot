@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "compile-ts": "npx tsc *.ts --outDir /src/commands",
     "test": "jest"
   },
   "keywords": [],
@@ -17,6 +18,7 @@
   "devDependencies": {
     "jest": "^27.0.6",
     "jest-discord": "^0.1.0",
-    "jest-environment-discord": "^0.1.0"
+    "jest-environment-discord": "^0.1.0",
+    "typescript": "^4.3.5"
   }
 }
