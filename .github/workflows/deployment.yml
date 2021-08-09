@@ -1,4 +1,4 @@
-name: Deploymeny (dev)
+name: deployment to server
 
 on:
   push:
