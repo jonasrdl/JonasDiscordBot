@@ -12,10 +12,12 @@ module.exports = {
       const firstName: string = removeQuotes(JSON.stringify(data.results[0].name.first));
       const lastName: string = removeQuotes(JSON.stringify(data.results[0].name.last));
       const age: string = removeQuotes(JSON.stringify(data.results[0].dob.age));
+      const picture: string = data.results[0].picture.large;
 
       message.channel.send(`First name: ${firstName}`);
       message.channel.send(`Last name: ${lastName}`);
       message.channel.send(`Age: ${age}`);
+      message.channel.send(`${picture}`);
     };
 
     fetch(`http://api.randomuser.me/`)
