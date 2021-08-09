@@ -3,11 +3,6 @@ module.exports = {
   description: 'Make req to the random API',
   execute(client, message) {
     const fetch = require('node-fetch');
-    //const config: any = JSON.parse(fs.readFileSync('../../../config/config.json', 'utf-8'));
-    //const args: any = message.content.slice(prefix.length).trim().split(' ');
-    //const command: any = args.shift().toLowerCase();
-
-    prefix = '.';
 
     const removeQuotes = (str: string): string => {
       return str.replace(/^"(.+(?="$))"$/, '$1');
