@@ -3,7 +3,7 @@ let prefix: string = '.';
 module.exports = {
   name: 'info',
   description: 'General info about the Bot',
-  execute(client, message, args, Discord) {
+  execute(client: any, message: any, args: any, Discord: any) {
     let days: number = Math.floor(client.uptime / 86400000);
     let hours: number = Math.floor(client.uptime / 3600000) % 24;
     let minutes: number = Math.floor(client.uptime / 60000) % 60;

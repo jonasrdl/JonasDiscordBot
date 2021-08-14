@@ -3,7 +3,7 @@ const quotes: string[] = ['Any time you try to create an Internet meme, automati
 module.exports = {
   name: 'quote',
   description: 'Get a random Quote',
-  execute(client, message, args, Discord) {
+  execute(client: any, message: any, args: any, Discord: any) {
     const randomQuote: number = Math.floor(Math.random() * quotes.length);
 
     let quoteEmbed: any = new Discord.MessageEmbed().setColor('#1f5e87').setTitle(quotes[randomQuote]);

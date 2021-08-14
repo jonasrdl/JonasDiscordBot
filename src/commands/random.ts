@@ -1,7 +1,7 @@
 module.exports = {
   name: 'random',
-  description: 'Make req to the random API',
-  execute(client, message) {
+  description: 'Make request to the random API',
+  execute(client: any, message: any) {
     const fetch = require('node-fetch');
 
     const removeQuotes = (str: string): string => {

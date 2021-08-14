@@ -1,7 +1,7 @@
 module.exports = {
   name: 'help',
   description: 'Help',
-  execute(client, message, args, Discord) {
+  execute(client: any, message: any, args: any, Discord: any) {
     let prefix: string = '.';
 
     let helpEmbed: any = new Discord.MessageEmbed()

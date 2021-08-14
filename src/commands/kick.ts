@@ -1,7 +1,7 @@
 module.exports = {
   name: 'kick',
   description: 'Kicks mentioned User',
-  execute(client, message, args, Discord) {
+  execute(client: any, message: any, args: any, Discord: any) {
     let target: any = message.mentions.members.first();
 
     if (!target) {
