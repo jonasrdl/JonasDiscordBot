@@ -4,9 +4,9 @@ module.exports = {
   execute(client, message, args, Discord) {
     if (!message.member.user.bot && message.guild) {
       if (message.mentions.users.first()) {
-        let user = message.mentions.users.first();
+        const userID = message.mentions.users.first();
 
-        message.channel.send(`${user}` + ' is stupid :^)');
+        message.channel.send(`${userID.username}` + ' is stupid :^)');
       }
     }
   },
