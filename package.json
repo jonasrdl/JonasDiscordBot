@@ -4,8 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "compile": "npx tsc",
-    "test": "jest"
+    "compile": "npx tsc"
   },
   "keywords": [],
   "author": "Jonas",
