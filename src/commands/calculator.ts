@@ -1,7 +1,7 @@
 module.exports = {
   name: 'calculator',
   description: 'Calculates two numbers',
-  execute(client, message) {
+  execute(client: any, message: any) {
     let prefix: string = '.';
 
     const args: string[] = message.content.slice(prefix.length).trim().split(' ');

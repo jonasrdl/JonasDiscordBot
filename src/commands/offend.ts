@@ -1,7 +1,7 @@
 module.exports = {
   name: 'offend',
   description: 'Offend someone',
-  execute(client, message, args, Discord) {
+  execute(client: any, message: any, args: any, Discord: any) {
     if (!message.member.user.bot && message.guild) {
       if (message.mentions.users.first()) {
         const userID = message.mentions.users.first();

@@ -1,7 +1,7 @@
 module.exports = {
   name: 'avatar',
   description: 'Get a users avatar',
-  execute(client, message: any, args, Discord: any) {
+  execute(client: any, message: any, args: any, Discord: any) {
     if (message.mentions.users.first()) {
       let user = message.mentions.users.first();
       let attachment = new Discord.MessageAttachment(user.avatarURL());

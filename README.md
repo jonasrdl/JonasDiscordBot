@@ -4,10 +4,19 @@
 
 [![deployment to server](https://github.com/jonasrdl/JonasDiscordBot/actions/workflows/deployment.yml/badge.svg?branch=master)](https://github.com/jonasrdl/JonasDiscordBot/actions/workflows/deployment.yml)
 [![publish](https://github.com/jonasrdl/JonasDiscordBot/actions/workflows/publish.yml/badge.svg)](https://github.com/jonasrdl/JonasDiscordBot/actions/workflows/publish.yml)
-### I am giving you permission to use the code for your own project. If you do please mention me somehow.
+### I am giving you permission to use the code for your own project. If you do, please mention me somehow.
+
+## Genereal Setup
 
 If you want to use your own token, create a file called "config.json" and enter the token like this: {"token": "your token"}.
 The API Key for Openweathermap is also in this file as {"api_token": "your API token"} - (Logically both in the same object).
+
+Folder Structure should look like this:
+```
+config
+└── config.json
+...
+```
 
 Example:
 ```json
@@ -16,7 +25,10 @@ Example:
   "api_token": "your-api-token"
 }
 ```
+## Informations
 
-If you can help me with problems ([Issues](https://github.com/jonasrdl/JonasDiscordBot/issues)), please do a merge request
+<b>Don't give your bot token to anyone, they have access to your entire bot. If you publish your code, do it as described above and add the config folder to the .gitignore.</b> 
+
+If you can help me with problems ([Issues](https://github.com/jonasrdl/JonasDiscordBot/issues)), please do a merge request.
 
 There are still many bugs that cause the bot to crash with certain commands, if all these bugs are fixed I will probably make it public.
