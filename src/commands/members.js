@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { Client, Intents, MessageEmbed, Guild } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders')
 
 module.exports = {
@@ -6,6 +6,13 @@ module.exports = {
         .setName('members')
         .setDescription('Get members of the server'),
     async execute(interaction) {
-        return interaction.reply()
+        const client = new Client({ 
+            intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_PRESENCES", "GUILD_MEMBERS"] 
+        });
+
+        const Guilds = client.guilds.cache.map((guild) => guild);
+        console.log(Guilds);
+
+        return interaction.reply('test')
     }
 }
