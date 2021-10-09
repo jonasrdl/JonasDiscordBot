@@ -2,4 +2,5 @@
 /.idea
 /.vscode
 /src/commands/js
+src/config.json
 /config/config.json
