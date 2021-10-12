@@ -25,7 +25,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
         channel.send({ embeds: [embed] })   
 
-        res.status.send(200)
+        res.send('Successfully')
     } else {
         res.send('Unauthorized')
     }
