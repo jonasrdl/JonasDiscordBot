@@ -18,30 +18,3 @@ module.exports = {
             return interaction.reply({ embeds: [embed] })
         }
     }
-
-
-
-
-
-
-
-
-
-/* const makeCall = (callback) => {
-    axios.get(`${API}/Karlsruhe`).then((response) => {
-        console.log(response.data);
-
-        callback(schlumpfLink)
-    })
-}
-
-module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('weather')
-        .setDescription('Get weather for a city'),
-    async execute(interaction) {
-
-
-        return interaction.reply()
-    }
-} */
