@@ -24,6 +24,8 @@ app.get(`/sendWeatherMessage`, (req, res) => {
             .setTimestamp()
 
         channel.send({ embeds: [embed] })   
+
+        res.status.send(200)
     } else {
         res.send('Unauthorized')
     }
