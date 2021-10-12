@@ -2,12 +2,14 @@ const { Client, Collection, Intents, MessageEmbed } = require('discord.js')
 const fs = require('fs')
 const { token, apiToken } = require('./config.json')
 const express = require('express')
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const PORT = 55689
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
 
 const app = express()
+app.use(cors())
 app.use(cookieParser())
 
 app.get(`/sendWeatherMessage`, (req, res) => {
