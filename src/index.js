@@ -68,4 +68,4 @@ app.listen(PORT, () => {
     console.log('=> Express server running')
 })
 
-client.login(token)
+client.login(token).then(() => console.log('Bot logged in!'))
