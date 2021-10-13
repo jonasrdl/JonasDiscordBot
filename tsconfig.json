@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES5",
-    "outDir": "src/commands/js",
-    "rootDir": "src/commands"
-  }
-}
