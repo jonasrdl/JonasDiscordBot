@@ -11,12 +11,14 @@ module.exports = {
         .addStringOption(option => option
             .setName('operator')
             .setDescription('Operator'))
-        .addStringOption(option => option.setName('secondnumber').setDescription('Second number')),
+      .addStringOption(option => option
+            .setName('secondnumber')
+            .setDescription('Second number')),
     async execute(interaction) {
         const firstNumber = interaction.options.getString('firstnumber')
         const operator = interaction.options.getString('operator')
         const secondNumber = interaction.options.getString('secondnumber')
-        w
+
         if (operator === '+') {
             return interaction.reply(Number(firstNumber) + Number(secondNumber))
           } else if (operator === '-') {
