@@ -1,9 +1,10 @@
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js')
 const fs = require('fs')
-const { token, apiToken } = require('./config.json')
+const { token, apiToken, nasaToken } = require('./config.json')
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const fetch = require('node-fetch')
 const PORT = 55689
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
@@ -27,7 +28,35 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
         channel.send({ embeds: [embed] })   
 
-        res.send('Successfully')
+        res.send('Request was successfully')
+    } else {
+        res.send('Unauthorized')
+    }
+})
+
+app.get('/sendNasaPOTD', (req, res) => {
+    const URL = `https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`
+    const channelID = '898644879784181790'
+    const channel = client.channels.cache.get(channelID)
+    let cookieFromClient = req.cookies['key']
+
+    if (cookieFromClient === apiToken) {
+        fetch (`https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+
+                const embed = new MessageEmbed()
+                .setColor('#1f5e87')
+                .setTitle('' + data.title)
+                .setDescription('' + data.explanation)
+                .setImage(data.hdurl)
+                .setTimestamp()
+
+            channel.send({ embeds: [embed] })
+      })  
+
+        res.send('Request was successfully')
     } else {
         res.send('Unauthorized')
     }
