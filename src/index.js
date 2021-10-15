@@ -28,7 +28,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
         channel.send({ embeds: [embed] })   
 
-        res.send('Request was successfully')
+        res.send('Request was successful')
     } else {
         res.status(401).send('Unauthorized')
     }
@@ -56,7 +56,7 @@ app.get('/sendNasaPOTD', (req, res) => {
             channel.send({ embeds: [embed] })
       })  
 
-        res.send('Request was successfully')
+        res.send('Request was successful')
     } else {
         res.status(401).send('Unauthorized')
     }
