@@ -1,6 +1,6 @@
 const { Client, Collection, Intents, MessageEmbed } = require('discord.js')
 const fs = require('fs')
-const { token, apiToken } = require('./config.json')
+const { token, apiToken, nasaToken } = require('./config.json')
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
