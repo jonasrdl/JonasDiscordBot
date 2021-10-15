@@ -51,7 +51,7 @@ app.get('/sendNasaPOTD', (req, res) => {
                 .setImage(data.hdurl)
                 .setTimestamp()
 
-        return interaction.reply({ embeds: [embed] })
+            channel.send({ embeds: [embed] })
       })  
 
         res.send('Successfully')
