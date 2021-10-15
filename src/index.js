@@ -30,7 +30,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
         res.send('Request was successfully')
     } else {
-        res.send('Unauthorized')
+        res.status(401).send('Unauthorized')
     }
 })
 
@@ -58,7 +58,7 @@ app.get('/sendNasaPOTD', (req, res) => {
 
         res.send('Request was successfully')
     } else {
-        res.send('Unauthorized')
+        res.status(401).send('Unauthorized')
     }
 })
 
