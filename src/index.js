@@ -4,6 +4,7 @@ const { token, apiToken, nasaToken } = require('./config.json')
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const fetch = require('node-fetch')
 const PORT = 55689
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
