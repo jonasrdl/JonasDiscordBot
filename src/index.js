@@ -33,6 +33,32 @@ app.get(`/sendWeatherMessage`, (req, res) => {
     }
 })
 
+app.get('/sendNasaPOTD', (req, res) => {
+    const URL = `https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`
+    const channelID = '898644879784181790'
+    const channel = client.channels.cache.get(channelID)
+    let cookieFromClient = req.cookies['key']
+
+    if (cookieFromClient === apiToken) {
+        fetch (`https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`)
+            .then(response => response.json())
+            .then(data => {
+                const embed = new MessageEmbed()
+                .setColor('#1f5e87')
+                .setTitle('' + data.title)
+                .setDescription('' + data.explanation)
+                .setImage(data.hdurl)
+                .setTimestamp()
+
+        return interaction.reply({ embeds: [embed] })
+      })  
+
+        res.send('Successfully')
+    } else {
+        res.send('Unauthorized')
+    }
+})
+
 client.commands = new Collection()
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 
