@@ -14,7 +14,7 @@ app.use(cors())
 app.use(cookieParser())
 
 app.get(`/isOnline`, (req, res) => {
-    res.send('Im online!')
+    res.send(200)
 })
 
 app.get(`/sendWeatherMessage`, (req, res) => {
