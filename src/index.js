@@ -13,6 +13,10 @@ const app = express()
 app.use(cors())
 app.use(cookieParser())
 
+app.get(`/isOnline`, (req, res) => {
+    res.send('Im online!')
+})
+
 app.get(`/sendWeatherMessage`, (req, res) => {
     const URL = 'https://wttr.in/Karlsruhe.png?m'
     const channelID = '897428889607999509'
