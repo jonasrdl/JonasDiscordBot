@@ -18,7 +18,7 @@ app.get(`/isOnline`, (req, res) => {
 })
 
 app.get(`/sendWeatherMessage`, (req, res) => {
-    const URL = 'https://wttr.in/Karlsruhe.png?m'
+    const URL = 'https://wttr.in/Karlsruhe.png'
     const channelID = '897428889607999509'
     const channel = client.channels.cache.get(channelID)
     let cookieFromClient = req.cookies['key']
@@ -35,6 +35,8 @@ app.get(`/sendWeatherMessage`, (req, res) => {
         res.send('Successful')
     } else {
         res.status(401).send('Unauthorized')
+
+        channel.send('Weather could not be sent. There was a problem.')
     }
 })
 
