@@ -8,7 +8,7 @@ module.exports = {
         .setName('status')
         .setDescription('Check if services are online'),
     async execute(interaction, client) {
-        fetch('http://172.17.0.1/api/website')
+        fetch('http://status.jonasriedel.com/api/website')
           .then(data => data.json())
           .then(data => {
             console.log(data)
