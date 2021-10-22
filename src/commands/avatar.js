@@ -4,14 +4,19 @@ const { SlashCommandBuilder } = require('@discordjs/builders')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('avatar')
-        .setDescription('Get a users avatar')
-        .addMentionableOption(option => 
-            option.setName('user')
-                .setDescription('get user')
-                .setRequired(true)),
+        .setDescription('Get avatar from someone')
+        .addMentionableOption(option => option
+          .setName('user')
+          .setDescription('User you want to get avatar from')),
     async execute(interaction) {
-        const avatar = interaction.options.getMentionable()
+        const user = interaction.options.getMentionable('user')
 
-        return interaction.reply(attachment)
+        const embed = new MessageEmbed()
+            .setColor('#1f5e87')
+            .setTitle('Avatar')
+            .setImage(user.user.displayAvatarURL({ dynamic: true, size: 512 }))
+            .setTimestamp();
+  
+        return interaction.reply({ embeds: [embed] })
     }
 }
