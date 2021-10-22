@@ -23,7 +23,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
     let cookieFromClient = req.cookies['key']
 
     if (cookieFromClient === apiToken) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Hamburg&appid=${weatherApiToken}&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${weatherApiToken}&units=metric`)
             .then(data => data.json())
             .then(data => {
                 const temperature = data.main.temp
@@ -49,6 +49,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
                     .setTitle(`Daily weather for Karlsruhe`)
                     .addField('Temperature', `${temperature}°C`, false)
                     .addField('Feels like', `${temperatureFeelsLike}°C`, false)
+                    .addField('Weather', `${data.weather[0].main}`)
                     .setTimestamp()
 
                 channel.send({ embeds: [embed] })  
