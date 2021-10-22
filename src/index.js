@@ -18,13 +18,12 @@ app.get(`/isOnline`, (req, res) => {
 })
 
 app.get(`/sendWeatherMessage`, (req, res) => {
-    const URL = `https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${weatherApiToken}&units=metric`
     const channelID = '897428889607999509'
     const channel = client.channels.cache.get(channelID)
     let cookieFromClient = req.cookies['key']
 
     if (cookieFromClient === apiToken) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${weatherApiToken}&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Hamburg&appid=${weatherApiToken}&units=metric`)
             .then(data => data.json())
             .then(data => {
                 const temperature = data.main.temp
@@ -35,6 +34,13 @@ app.get(`/sendWeatherMessage`, (req, res) => {
                     guild.members.fetch(userID)
                         .then(user => {
                             user.send('The temperature is under 6°C, its cold!')
+                        })
+                }
+
+                if (data.weather[0].main === 'Rain') {
+                    guild.members.fetch(userID)
+                        .then(user => {
+                            user.send('Watch out, its raining!')
                         })
                 }
 
