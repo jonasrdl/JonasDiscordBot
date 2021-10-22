@@ -37,16 +37,16 @@ app.get(`/sendWeatherMessage`, (req, res) => {
                             user.send('The temperature is under 6°C, its cold!')
                         })
                 }
-            })
-        
-        const embed = new MessageEmbed()
-            .setColor('#1f5e87')
-            .setTitle(`Daily weather for Karlsruhe`)
-            .addField('Temperature', `${temperature}°C`, false)
-            .addField('Feels like', `${temperatureFeelsLike}°C`, false)
-            .setTimestamp()
 
-        channel.send({ embeds: [embed] })   
+                const embed = new MessageEmbed()
+                    .setColor('#1f5e87')
+                    .setTitle(`Daily weather for Karlsruhe`)
+                    .addField('Temperature', `${temperature}°C`, false)
+                    .addField('Feels like', `${temperatureFeelsLike}°C`, false)
+                    .setTimestamp()
+
+                channel.send({ embeds: [embed] })  
+            })
 
         res.send('Successful')
     } else {
