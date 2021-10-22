@@ -24,7 +24,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
     let cookieFromClient = req.cookies['key']
 
     if (cookieFromClient === apiToken) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiToken}&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${weatherApiToken}&units=metric`)
             .then(data => data.json())
             .then(data => {
                 const temperature = data.main.temp
