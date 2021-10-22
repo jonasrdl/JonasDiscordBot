@@ -1,36 +1,65 @@
-const { Client, Collection, Intents, MessageEmbed } = require('discord.js')
+const { Client, Collection, Intents, MessageEmbed, Guild } = require('discord.js')
 const fs = require('fs')
-const { token, apiToken, nasaToken } = require('./config.json')
+const { token, apiToken, nasaToken, weatherApiToken, guildId, userID } = require('./config.json')
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const fetch = require('node-fetch')
 const PORT = 55689
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
 
 const app = express()
 app.use(cors())
 app.use(cookieParser())
 
+app.get(`/isOnline`, (req, res) => {
+    res.sendStatus(200)
+})
+
 app.get(`/sendWeatherMessage`, (req, res) => {
-    const URL = 'https://wttr.in/Karlsruhe.png?m'
     const channelID = '897428889607999509'
     const channel = client.channels.cache.get(channelID)
     let cookieFromClient = req.cookies['key']
 
     if (cookieFromClient === apiToken) {
-        const embed = new MessageEmbed()
-            .setColor('#1f5e87')
-            .setTitle('Daily weather report for Karlsruhe')
-            .setImage(URL)
-            .setTimestamp()
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${weatherApiToken}&units=metric`)
+            .then(data => data.json())
+            .then(data => {
+                const temperature = data.main.temp
+                const temperatureFeelsLike = data.main.feels_like
+                const guild = client.guilds.cache.get(guildId)
 
-        channel.send({ embeds: [embed] })   
+                if (temperature <= 6) {
+                    guild.members.fetch(userID)
+                        .then(user => {
+                            user.send('The temperature is under 6°C, its cold!')
+                        })
+                }
 
-        res.send('Request was successfully')
+                if (data.weather[0].main === 'Rain') {
+                    guild.members.fetch(userID)
+                        .then(user => {
+                            user.send('Watch out, its raining!')
+                        })
+                }
+
+                const embed = new MessageEmbed()
+                    .setColor('#1f5e87')
+                    .setTitle(`Daily weather for Karlsruhe`)
+                    .addField('Temperature', `${temperature}°C`, false)
+                    .addField('Feels like', `${temperatureFeelsLike}°C`, false)
+                    .addField('Weather', `${data.weather[0].main}`)
+                    .setTimestamp()
+
+                channel.send({ embeds: [embed] })  
+            })
+
+        res.send('Successful')
     } else {
-        res.send('Unauthorized')
+        res.status(401).send('Unauthorized')
+
+        channel.send('Weather could not be sent. There was a problem.')
     }
 })
 
@@ -56,9 +85,9 @@ app.get('/sendNasaPOTD', (req, res) => {
             channel.send({ embeds: [embed] })
       })  
 
-        res.send('Request was successfully')
+        res.send('Successful')
     } else {
-        res.send('Unauthorized')
+        res.status(401).send('Unauthorized')
     }
 })
 
@@ -86,7 +115,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     try {
-        await command.execute(interaction)
+        await command.execute(interaction, client)
     } catch (error) {
         console.error(error)
         return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true })
