@@ -14,7 +14,7 @@ module.exports = {
               const successEmbed = new MessageEmbed()
                 .setColor('#1f5e87')
                 .setTitle('Status')
-                .addField('Website', 'Online ✔️', false)
+                .addField('Website', 'Online  ✔️', false)
                 .setTimestamp();
 
                 interaction.reply({ embeds: [successEmbed] })
@@ -22,11 +22,13 @@ module.exports = {
               const failEmbed = new MessageEmbed()
                 .setColor('#1f5e87')
                 .setTitle('Status')
-                .addField('Website', 'Offline ❌', false)
+                .addField('Website', 'Offline  ❌', false)
                 .setTimestamp();
 
                 interaction.reply({ embeds: [failEmbed] })
             }
+          }).catch(error => {
+            console.log(error)
           })
     }
 }
