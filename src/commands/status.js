@@ -9,11 +9,8 @@ module.exports = {
         .setDescription('Check if services are online'),
     async execute(interaction, client) {
         fetch('http://status.jonasriedel.com/api/website')
-          .then(data => data.json())
-          .then(data => {
-            console.log(data)
-          })
-
+          .then(data => console.log(data))
+          
         let websiteOnline
 
         /* const embed = new MessageEmbed()
