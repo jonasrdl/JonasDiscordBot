@@ -2,6 +2,7 @@ const { Client, Collection, Intents, MessageEmbed, Guild } = require('discord.js
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const { weatherApiToken, guildId } = require('../config.json')
 const fetch = require('node-fetch')
+const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,12 +12,21 @@ module.exports = {
     async execute(interaction, client) {
         const city = interaction.options.getString("city")
 
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiToken}&units=metric`)
+        if (city === '') {
+            const embed = new MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle(`Invalid city, try again!`)
+                .setTimestamp()
+
+            return interaction.reply({ embeds: [embed] })
+        }
+
+        if (!specialChars.test(city)) {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiToken}&units=metric`)
             .then(data => data.json())
             .then(data => {        
                 const temperature = data.main.temp
                 const temperatureFeelsLike = data.main.feels_like
-                const guild = client.guilds.cache.get(guildId)
             
                 const embed = new MessageEmbed()
                     .setColor('#1f5e87')
@@ -28,5 +38,13 @@ module.exports = {
 
                 return interaction.reply({ embeds: [embed] })
             })
+        } else {
+            const embed = new MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle(`Invalid city, try again!`)
+                .setTimestamp()
+
+            return interaction.reply({ embeds: [embed] })
+        }
     }
 }
