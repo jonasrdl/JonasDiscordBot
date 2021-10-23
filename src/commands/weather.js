@@ -12,6 +12,15 @@ module.exports = {
     async execute(interaction, client) {
         const city = interaction.options.getString("city")
 
+        if (city === '') {
+            const embed = new MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle(`Invalid city, try again!`)
+                .setTimestamp()
+
+            return interaction.reply({ embeds: [embed] })
+        }
+
         if (!specialChars.test(city)) {
             fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiToken}&units=metric`)
             .then(data => data.json())
