@@ -13,6 +13,14 @@ const app = express()
 app.use(cors())
 app.use(cookieParser())
 
+const isWeekend = () => {
+    const today = new Date()
+
+    if (today.getDay() == 6 || today.getDay() == 0) {
+        return true
+    }    
+}
+
 app.get(`/isOnline`, (req, res) => {
     res.sendStatus(200)
 })
@@ -31,6 +39,10 @@ app.get(`/sendWeatherMessage`, (req, res) => {
                 const guild = client.guilds.cache.get(guildId)
 
                 if (temperature <= 6) {
+                    if (isWeekend) {
+                        return
+                    }
+
                     guild.members.fetch(userID)
                         .then(user => {
                             user.send('The temperature is under 6°C, its cold!')
@@ -38,6 +50,10 @@ app.get(`/sendWeatherMessage`, (req, res) => {
                 }
 
                 if (data.weather[0].main === 'Rain') {
+                    if (isWeekend) {
+                        return
+                    }
+
                     guild.members.fetch(userID)
                         .then(user => {
                             user.send('Watch out, its raining!')
