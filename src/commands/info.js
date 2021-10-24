@@ -5,9 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('info')
         .setDescription('Info about the bot'),
-    async execute(interaction) {
-        const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
-
+    async execute(interaction, client) {
         const days = Math.floor(client.uptime / 86400000)
         const hours = Math.floor(client.uptime / 3600000) % 24
         const minutes = Math.floor(client.uptime / 60000) % 60
@@ -21,7 +19,7 @@ module.exports = {
             .addField('Need help?', '/' + 'help', false)
             .addField('Who made me?', '/' + 'author', false)
             .addField('Uptime', days + ' Days, ' + hours + ' Hours, ' + minutes + ' Minutes, ' + seconds + ' Seconds', false)
-            .setTimestamp()
+            .setTimestamp() 
         
         return interaction.reply({ embeds: [embed] })
     }
