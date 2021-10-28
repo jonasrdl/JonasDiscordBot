@@ -73,8 +73,6 @@ app.get('/sendNasaPOTD', (req, res) => {
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
-
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
           .setTitle('' + data.title)
@@ -117,7 +115,6 @@ client.on('interactionCreate', async (interaction) => {
   try {
     await command.execute(interaction, client)
   } catch (error) {
-    console.error(error)
     return interaction.reply({
       content: 'There was an error while executing this command!',
       ephemeral: true,
