@@ -65,47 +65,23 @@ app.get(`/sendWeatherMessage`, (req, res) => {
   }
 })
 
-// ----------------------------------------------- //
+const channelID = '897428889607999509'
+const channel = client.channels.cache.get(channelID)
 
-async function getCoronaData() {
-  try {
-    const URL = 'https://corona.karlsruhe.de/'
-    const browser = await puppeteer.launch()
-    const page = await browser.newPage()
-    let spanElement;
+const embed = new MessageEmbed()
+  .setColor('#1f5e87')
+  .setTitle(`Daily weather for Karlsruhe`)
+  .addField('Temperature', `test`, false)
+  .addField('Feels like', 'test', false)
+  .addField('Weather', `test`)
+  .setTimestamp()
 
-    await page.goto(URL)
+channel.send({ embeds: [embed] })
 
-    spanElement = await page.$x('/html/body/article/div[3]/div/div[3]/p[2]/strong')
-    spanElement = spanElement.pop()
-    spanElement = await spanElement.getProperty('innerText');
-    spanElement = await spanElement.jsonValue();
-
-    return parseInt(spanElement)
-} catch (error) {
-    console.log(error)
-  }
-}
-
-// ----------------------------------------------- //
-
-
-
-app.get('/incidence', (req, res) => {
-  const channelID = 907941126244278302
-  const channel = client.channels.cache.get(channelID)
-  
-  const incidence = getCoronaData().then(function(result) {
+  /*const incidence = getCoronaData().then(function(result) {
     incidence = result
-  })
+  })*/
 
-  const embed = new MessageEmbed()
-    .setColor('#1f5e87')
-    .setTitle(`${incidence}`)
-    .setTimestamp()
-
-  channel.send({ embeds: [embed] })
-})
 
 app.get('/sendNasaPOTD', (req, res) => {
   const URL = `https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`
@@ -165,6 +141,26 @@ client.on('interactionCreate', async (interaction) => {
     })
   }
 })
+
+/* async function getCoronaData() {
+  try {
+    const URL = 'https://corona.karlsruhe.de/'
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+    let spanElement;
+
+    await page.goto(URL)
+
+    spanElement = await page.$x('/html/body/article/div[3]/div/div[3]/p[2]/strong')
+    spanElement = spanElement.pop()
+    spanElement = await spanElement.getProperty('innerText');
+    spanElement = await spanElement.jsonValue();
+
+    return parseInt(spanElement)
+} catch (error) {
+    console.log(error)
+  }
+} */
 
 app.listen(PORT, () => {
   console.log('=> Express server running')
