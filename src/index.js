@@ -5,6 +5,8 @@ const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const fetch = require('node-fetch')
+const puppeteer = require('puppeteer')
+const { default: axios } = require('axios')
 const PORT = 55689
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
@@ -61,6 +63,41 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
     channel.send('Weather could not be sent. There was a problem.')
   }
+})
+
+// ----------------------------------------------- //
+
+async function getCoronaData() {
+  try {
+    const URL = 'https://corona.karlsruhe.de/'
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+    let spanElement;
+
+    await page.goto(URL)
+
+    spanElement = await page.$x('/html/body/article/div[3]/div/div[3]/p[2]/strong')
+    spanElement = spanElement.pop()
+    spanElement = await spanElement.getProperty('innerText');
+    spanElement = await spanElement.jsonValue();
+
+    console.log(parseInt(spanElement))
+} catch (error) {
+    console.log(error)
+  }
+}
+
+// ----------------------------------------------- //
+
+app.get('/incidence', (req, res) => {
+  const incidence = getCoronaData()
+
+  const embed = new MessageEmbed()
+    .setColor('#1f5e87')
+    .setTitle(`${incidence}`)
+    .setTimestamp()
+
+  channel.send({ embeds: [embed] })
 })
 
 app.get('/sendNasaPOTD', (req, res) => {
