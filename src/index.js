@@ -81,7 +81,7 @@ async function getCoronaData() {
     spanElement = await spanElement.getProperty('innerText');
     spanElement = await spanElement.jsonValue();
 
-    console.log(parseInt(spanElement))
+    return parseInt(spanElement)
 } catch (error) {
     console.log(error)
   }
@@ -89,10 +89,15 @@ async function getCoronaData() {
 
 // ----------------------------------------------- //
 
+
+
 app.get('/incidence', (req, res) => {
   const channelID = 907941126244278302
   const channel = client.channels.cache.get(channelID)
-  const incidence = getCoronaData()
+  
+  const incidence = getCoronaData().then(function(result) {
+    incidence = result
+  })
 
   const embed = new MessageEmbed()
     .setColor('#1f5e87')
