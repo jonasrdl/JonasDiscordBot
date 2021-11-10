@@ -90,6 +90,8 @@ async function getCoronaData() {
 // ----------------------------------------------- //
 
 app.get('/incidence', (req, res) => {
+  const channelID = 907941126244278302
+  const channel = client.channels.cache.get(channelID)
   const incidence = getCoronaData()
 
   const embed = new MessageEmbed()
