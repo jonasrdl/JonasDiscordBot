@@ -65,19 +65,6 @@ app.get(`/sendWeatherMessage`, (req, res) => {
   }
 })
 
-const channelID = '897428889607999509'
-const channel = client.channels.cache.get(channelID)
-
-const embed = new MessageEmbed()
-  .setColor('#1f5e87')
-  .setTitle(`Daily weather for Karlsruhe`)
-  .addField('Temperature', `test`, false)
-  .addField('Feels like', 'test', false)
-  .addField('Weather', `test`)
-  .setTimestamp()
-
-channel.send({ embeds: [embed] })
-
 app.get('/sendNasaPOTD', (req, res) => {
   const channelID = '898644879784181790'
   const channel = client.channels.cache.get(channelID)
