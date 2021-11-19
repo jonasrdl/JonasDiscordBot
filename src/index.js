@@ -99,10 +99,6 @@ app.get('/sendIncidence', (req, res) => {
     fetch(`http://172.17.0.1:55690/incidence/stadtkreis/`)
       .then((response) => response.json())
       .then((data) => {
-        channel.setName('not_general')
-          .then(newChannel => console.log(`Channel's new name is ${newChannel.name}`))
-          .catch(console.error);
-
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
           .setTitle('Karlsruhe Inzidenz')
