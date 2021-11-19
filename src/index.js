@@ -90,7 +90,7 @@ app.get('/sendNasaPOTD', (req, res) => {
   }
 })
 
-app.get('/sendIncidence', (_, res) => {
+app.get('/sendIncidence', (req, res) => {
   const channelID = '907941126244278302'
   const channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
