@@ -78,13 +78,7 @@ const embed = new MessageEmbed()
 
 channel.send({ embeds: [embed] })
 
-  /*const incidence = getCoronaData().then(function(result) {
-    incidence = result
-  })*/
-
-
 app.get('/sendNasaPOTD', (req, res) => {
-  const URL = `https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`
   const channelID = '898644879784181790'
   const channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
@@ -98,6 +92,29 @@ app.get('/sendNasaPOTD', (req, res) => {
           .setTitle('' + data.title)
           .setDescription('' + data.explanation)
           .setImage(data.hdurl)
+          .setTimestamp()
+
+        channel.send({ embeds: [embed] })
+      })
+
+    res.send('Successful')
+  } else {
+    res.status(401).send('Unauthorized')
+  }
+})
+
+app.get('/sendIncidence', (_, res) => {
+  const channelID = '907941126244278302'
+  const channel = client.channels.cache.get(channelID)
+  let cookieFromClient = req.cookies['key']
+
+  if (cookieFromClient === apiToken) {
+    fetch(`http://172.17.0.1:55690/incidence/stadtkreis/`)
+      .then((response) => response.json())
+      .then((data) => {
+        const embed = new MessageEmbed()
+          .setColor('#1f5e87')
+          .setTitle('' + JSON.stringify(data))
           .setTimestamp()
 
         channel.send({ embeds: [embed] })
@@ -141,26 +158,6 @@ client.on('interactionCreate', async (interaction) => {
     })
   }
 })
-
-/* async function getCoronaData() {
-  try {
-    const URL = 'https://corona.karlsruhe.de/'
-    const browser = await puppeteer.launch()
-    const page = await browser.newPage()
-    let spanElement;
-
-    await page.goto(URL)
-
-    spanElement = await page.$x('/html/body/article/div[3]/div/div[3]/p[2]/strong')
-    spanElement = spanElement.pop()
-    spanElement = await spanElement.getProperty('innerText');
-    spanElement = await spanElement.jsonValue();
-
-    return parseInt(spanElement)
-} catch (error) {
-    console.log(error)
-  }
-} */
 
 app.listen(PORT, () => {
   console.log('=> Express server running')
