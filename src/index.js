@@ -101,7 +101,8 @@ app.get('/sendIncidence', (req, res) => {
       .then((data) => {
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
-          .setTitle('' + data.incidence)
+          .setTitle('Karlsruhe Inzidenz')
+          .addField('Stadtkreis', data.incidence)
           .setTimestamp()
 
         channel.send({ embeds: [embed] })
