@@ -17,5 +17,9 @@ module.exports = {
 
         return interaction.reply({ embeds: [embed] })
       })
+      .catch((err) => {
+        console.error(err)
+        return interaction.reply('Something went wrong.')
+      })
   }
 }
