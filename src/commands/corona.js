@@ -20,7 +20,7 @@ module.exports = {
       })
       .catch((err) => {
         console.error(err)
-        return interaction.reply('Something went wrong.')
+        return interaction.reply('Something is wrong with the API')
       })
   }
 }
