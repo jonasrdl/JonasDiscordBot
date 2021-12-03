@@ -112,14 +112,16 @@ app.get('/sendIncidence', (req, res) => {
   const channelID = '911210084045062175'
   let channel = client.channels.cache.get(channelID)
 
-  fetch(`http://172.17.0.1:55690/incidence/landkreis`)
+  fetch(`http://172.17.0.1:55690/incidence`)
     .then((response) => response.json())
     .then((data) => {
       channel = client.channels.cache.get('911210084045062175')
 
       const embed = new MessageEmbed()
         .setColor('#1f5e87')
-        .setTitle('' + data.incidence)
+        .setTitle('Corona Inzidenz')
+        .addField('Stadtkreis', `${data.stadtkreis}`, false)
+        .addField('Landkreis', `${data.landkreis}`, false)
         .setTimestamp()
 
       channel.send({ embeds: [embed] })
