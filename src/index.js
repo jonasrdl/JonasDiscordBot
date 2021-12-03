@@ -1,6 +1,19 @@
-const { Client, Collection, Intents, MessageEmbed, Guild } = require('discord.js')
+const {
+  Client,
+  Collection,
+  Intents,
+  MessageEmbed,
+  Guild,
+} = require('discord.js')
 const fs = require('fs')
-const { token, apiToken, nasaToken, weatherApiToken, guildId, userID } = require('./config.json')
+const {
+  token,
+  apiToken,
+  nasaToken,
+  weatherApiToken,
+  guildId,
+  userID,
+} = require('./config.json')
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -9,7 +22,9 @@ const puppeteer = require('puppeteer')
 const { default: axios } = require('axios')
 const PORT = 55689
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+})
 
 const app = express()
 app.use(cors())
@@ -83,29 +98,22 @@ app.get('/sendNasaPOTD', (req, res) => {
 
         channel.send({ embeds: [embed] })
       })
+      .catch((error) => {
+        console.log(error)
+      })
 
-    res.send('Successful')
-  } else {
-    res.status(401).send('Unauthorized')
-  }
-})
-
-app.get('/sendIncidence', (req, res) => {
-  const channelID = '907941126244278302'
-  const channel = client.channels.cache.get(channelID)
-  let cookieFromClient = req.cookies['key']
-
-  if (cookieFromClient === apiToken) {
-    fetch(`http://172.17.0.1:55690/incidence/stadtkreis/`)
+    fetch(`http://172.17.0.1:55690/incidence/landkreis`)
       .then((response) => response.json())
       .then((data) => {
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
-          .setTitle('Karlsruhe Inzidenz')
-          .addField('Stadtkreis', data.incidence)
+          .setTitle('' + data.incidence)
           .setTimestamp()
 
         channel.send({ embeds: [embed] })
+      })
+      .catch((error) => {
+        console.log(error)
       })
 
     res.send('Successful')
@@ -115,7 +123,9 @@ app.get('/sendIncidence', (req, res) => {
 })
 
 client.commands = new Collection()
-const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'))
+const commandFiles = fs
+  .readdirSync('./commands')
+  .filter((file) => file.endsWith('.js'))
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
