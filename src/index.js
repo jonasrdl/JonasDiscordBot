@@ -82,7 +82,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
 app.get('/sendNasaPOTD', (req, res) => {
   const channelID = '898644879784181790'
-  const channel = client.channels.cache.get(channelID)
+  let channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
 
   if (cookieFromClient === apiToken) {
@@ -105,6 +105,8 @@ app.get('/sendNasaPOTD', (req, res) => {
     fetch(`http://172.17.0.1:55690/incidence/landkreis`)
       .then((response) => response.json())
       .then((data) => {
+        channel = client.channels.cache.get('911210084045062175')
+
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
           .setTitle('' + data.incidence)
