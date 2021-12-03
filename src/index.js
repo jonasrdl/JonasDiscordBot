@@ -102,26 +102,33 @@ app.get('/sendNasaPOTD', (req, res) => {
         console.log(error)
       })
 
-    fetch(`http://172.17.0.1:55690/incidence/landkreis`)
-      .then((response) => response.json())
-      .then((data) => {
-        channel = client.channels.cache.get('911210084045062175')
-
-        const embed = new MessageEmbed()
-          .setColor('#1f5e87')
-          .setTitle('' + data.incidence)
-          .setTimestamp()
-
-        channel.send({ embeds: [embed] })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
     res.send('Successful')
   } else {
     res.status(401).send('Unauthorized')
   }
+})
+
+app.get('/sendIncidence', (req, res) => {
+  const channelID = '911210084045062175'
+  let channel = client.channels.cache.get(channelID)
+
+  fetch(`http://172.17.0.1:55690/incidence/landkreis`)
+    .then((response) => response.json())
+    .then((data) => {
+      channel = client.channels.cache.get('911210084045062175')
+
+      const embed = new MessageEmbed()
+        .setColor('#1f5e87')
+        .setTitle('' + data.incidence)
+        .setTimestamp()
+
+      channel.send({ embeds: [embed] })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+  res.send('Successful')
 })
 
 client.commands = new Collection()
