@@ -7,20 +7,20 @@ module.exports = {
     .setName('corona')
     .setDescription('Get infos about the current corona situation.'),
   async execute(interaction) {
-    fetch(`http://172.17.0.1:55690/incidence/stadtkreis/`)
+    fetch(`http://172.17.0.1:55690/incidence`)
       .then((response) => response.json())
       .then((data) => {
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
-          .setTitle('Karlsruhe Inzidenz')
-          .addField('Stadtkreis', data.incidence)
+          .setTitle('Corona Inzidenz')
+          .addField('Stadtkreis', `${data.stadtkreis}`, false)
+          .addField('Landkreis', `${data.landkreis}`, false)
           .setTimestamp()
 
         return interaction.reply({ embeds: [embed] })
       })
-      .catch((err) => {
-        console.error(err)
-        return interaction.reply('Something is wrong with the API')
+      .catch((error) => {
+        console.log(error)
       })
   }
 }
