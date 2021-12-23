@@ -172,4 +172,23 @@ app.listen(PORT, () => {
   console.log('=> Express server running')
 })
 
+//Check if its christmas
+const isChristmas = () => {
+  const today = new Date()
+  const christmas = new Date(today.getFullYear(), 12, 24)
+   
+  if (today.getMonth() === 12 && today.getDate() === 24) {
+    return true
+  } else {
+    return false
+  }
+}
+
+if (isChristmas) { 
+  const channelID = '750977816165875754'
+  let channel = client.channels.cache.get(channelID)
+  
+  channel.send('Hey zusammen! Frohes Weihnachtsfest und schöne Feiertage euch, feiert schön! :)')
+}
+
 client.login(token).then(() => console.log('Bot logged in!'))
