@@ -3,5 +3,4 @@ src/node_modules
 /.vscode
 src/config.json
 /src/commands/js
-src/config.json
 /config/config.json
