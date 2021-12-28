@@ -31,9 +31,12 @@ app.get(`/sendWeatherMessage`, (req, res) => {
       .get(`${process.env.LOCATION_API_URL}`, {
         headers: { Apikey: `${process.env.LOCATION_API_KEY}` }
       })
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => {
         console.log(data)
+      })
+      .catch((error) => {
+        console.log(error)
       })
 
     fetch(
