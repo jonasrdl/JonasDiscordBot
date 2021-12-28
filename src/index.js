@@ -25,11 +25,12 @@ app.get(`/sendWeatherMessage`, (req, res) => {
   const channelID = '897428889607999509'
   const channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
-  const locationApiUrl = process.env.LOCATION_API_URL
 
   if (cookieFromClient === process.env.API_TOKEN) {
     axios
-      .get(`${locationApiUrl}`, { headers: { Apikey: `${process.env.LOCATION_API_KEY}` } })
+      .get(`${process.env.LOCATION_API_URL}`, {
+        headers: { Apikey: `${process.env.LOCATION_API_KEY}` }
+      })
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
