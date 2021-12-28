@@ -32,7 +32,10 @@ app.get(`/sendWeatherMessage`, (req, res) => {
         headers: { Apikey: `${process.env.LOCATION_API_KEY}` }
       })
       .then((data) => {
-        console.log(data.data[4].name)
+        let address = data.data[4].address
+        let temp = address.split(',')
+
+        console.log(temp)
       })
       .catch((error) => {
         console.log(error)
