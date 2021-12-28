@@ -1,19 +1,6 @@
-const {
-  Client,
-  Collection,
-  Intents,
-  MessageEmbed,
-  Guild,
-} = require('discord.js')
+const { Client, Collection, Intents, MessageEmbed, Guild } = require('discord.js')
 const fs = require('fs')
-const {
-  token,
-  apiToken,
-  nasaToken,
-  weatherApiToken,
-  guildId,
-  userID,
-} = require('./config.json')
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -23,7 +10,7 @@ const { default: axios } = require('axios')
 const PORT = 55689
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 })
 
 const app = express()
@@ -39,24 +26,24 @@ app.get(`/sendWeatherMessage`, (req, res) => {
   const channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
 
-  if (cookieFromClient === apiToken) {
+  if (cookieFromClient === process.env.API_TOKEN) {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${weatherApiToken}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${process.env.WEATHER_API_TOKEN}&units=metric`
     )
       .then((data) => data.json())
       .then((data) => {
         const temperature = data.main.temp
         const temperatureFeelsLike = data.main.feels_like
-        const guild = client.guilds.cache.get(guildId)
+        const guild = client.guilds.cache.get(process.env.DISCORD_GUILD_ID)
 
         if (temperature <= 6) {
-          guild.members.fetch(userID).then((user) => {
+          guild.members.fetch(process.env.USER_ID).then((user) => {
             user.send('The temperature is under 6°C, its cold!')
           })
         }
 
         if (data.weather[0].main === 'Rain') {
-          guild.members.fetch(userID).then((user) => {
+          guild.members.fetch(process.env.USER_ID).then((user) => {
             user.send('Watch out, its raining!')
           })
         }
@@ -85,8 +72,8 @@ app.get('/sendNasaPOTD', (req, res) => {
   let channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
 
-  if (cookieFromClient === apiToken) {
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${nasaToken}`)
+  if (cookieFromClient === process.env.API_TOKEN) {
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_TOKEN}`)
       .then((response) => response.json())
       .then((data) => {
         const embed = new MessageEmbed()
@@ -134,9 +121,7 @@ app.get('/sendIncidence', (req, res) => {
 })
 
 client.commands = new Collection()
-const commandFiles = fs
-  .readdirSync('./commands')
-  .filter((file) => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'))
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
@@ -163,7 +148,7 @@ client.on('interactionCreate', async (interaction) => {
   } catch (error) {
     return interaction.reply({
       content: 'There was an error while executing this command!',
-      ephemeral: true,
+      ephemeral: true
     })
   }
 })
@@ -172,23 +157,4 @@ app.listen(PORT, () => {
   console.log('=> Express server running')
 })
 
-//Check if its christmas
-const isChristmas = () => {
-  const today = new Date()
-  const christmas = new Date(today.getFullYear(), 12, 24)
-   
-  if (today.getMonth() === 12 && today.getDate() === 24) {
-    return true
-  } else {
-    return false
-  }
-}
-
-if (isChristmas) { 
-  const channelID = '750977816165875754'
-  let channel = client.channels.cache.get(channelID)
-  
-  channel.send('Hey zusammen! Frohes Weihnachtsfest und schöne Feiertage euch, feiert schön! :)')
-}
-
-client.login(token).then(() => console.log('Bot logged in!'))
+client.login(process.env.DISCORD_BOT_TOKEN).then(() => console.log('Bot logged in!'))

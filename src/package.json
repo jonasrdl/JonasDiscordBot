@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.2.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "forever": "^4.0.1",
     "node-fetch": "^2.6.1",
