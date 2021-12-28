@@ -29,7 +29,7 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
   if (cookieFromClient === process.env.API_TOKEN) {
     axios
-      .get(`${locationApiUrl}`, { headers: { Apikey: process.env.LOCATION_API_KEY } })
+      .get(`${locationApiUrl}`, { headers: { Apikey: `${process.env.LOCATION_API_KEY}` } })
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
