@@ -1,6 +1,5 @@
 const { Client, Collection, Intents, MessageEmbed, Guild } = require('discord.js')
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const { weatherApiToken } = require('../config.json')
 const fetch = require('node-fetch')
 const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
