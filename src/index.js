@@ -34,8 +34,11 @@ app.get(`/sendWeatherMessage`, (req, res) => {
       .then((data) => {
         let address = data.data[4].address
         let temp = address.split(',')
+        let cityWithCode = temp[1].split(' ')
+        let city = cityWithCode[1]
 
-        console.log(temp)
+        console.log(cityWithCode)
+        console.log(city)
       })
       .catch((error) => {
         console.log(error)
