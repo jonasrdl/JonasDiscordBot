@@ -25,8 +25,16 @@ app.get(`/sendWeatherMessage`, (req, res) => {
   const channelID = '897428889607999509'
   const channel = client.channels.cache.get(channelID)
   let cookieFromClient = req.cookies['key']
+  const locationApiUrl = process.env.LOCATION_API_URL
 
   if (cookieFromClient === process.env.API_TOKEN) {
+    axios
+      .get(locationApiUrl, { headers: { Apikey: process.env.LOCATION_API_KEY } })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+      })
+
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${process.env.WEATHER_API_TOKEN}&units=metric`
     )
