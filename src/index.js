@@ -35,45 +35,42 @@ app.get(`/sendWeatherMessage`, (req, res) => {
         let address = data.data[4].address
         let temp = address.split(',')
         let cityWithCode = temp[1].split(' ')
-        let city = cityWithCode[1]
+        let city = cityWithCode[2]
 
-        console.log(cityWithCode)
-        console.log(city)
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_API_TOKEN}&units=metric`
+        )
+          .then((data) => data.json())
+          .then((data) => {
+            const temperature = data.main.temp
+            const temperatureFeelsLike = data.main.feels_like
+            const guild = client.guilds.cache.get(process.env.DISCORD_GUILD_ID)
+
+            if (temperature <= 6) {
+              guild.members.fetch(process.env.USER_ID).then((user) => {
+                user.send('The temperature is under 6°C, its cold!')
+              })
+            }
+
+            if (data.weather[0].main === 'Rain') {
+              guild.members.fetch(process.env.USER_ID).then((user) => {
+                user.send('Watch out, its raining!')
+              })
+            }
+
+            const embed = new MessageEmbed()
+              .setColor('#1f5e87')
+              .setTitle(`Daily weather for Karlsruhe`)
+              .addField('Temperature', `${temperature}°C`, false)
+              .addField('Feels like', `${temperatureFeelsLike}°C`, false)
+              .addField('Weather', `${data.weather[0].main}`)
+              .setTimestamp()
+
+            channel.send({ embeds: [embed] })
+          })
       })
       .catch((error) => {
         console.log(error)
-      })
-
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=Karlsruhe&appid=${process.env.WEATHER_API_TOKEN}&units=metric`
-    )
-      .then((data) => data.json())
-      .then((data) => {
-        const temperature = data.main.temp
-        const temperatureFeelsLike = data.main.feels_like
-        const guild = client.guilds.cache.get(process.env.DISCORD_GUILD_ID)
-
-        if (temperature <= 6) {
-          guild.members.fetch(process.env.USER_ID).then((user) => {
-            user.send('The temperature is under 6°C, its cold!')
-          })
-        }
-
-        if (data.weather[0].main === 'Rain') {
-          guild.members.fetch(process.env.USER_ID).then((user) => {
-            user.send('Watch out, its raining!')
-          })
-        }
-
-        const embed = new MessageEmbed()
-          .setColor('#1f5e87')
-          .setTitle(`Daily weather for Karlsruhe`)
-          .addField('Temperature', `${temperature}°C`, false)
-          .addField('Feels like', `${temperatureFeelsLike}°C`, false)
-          .addField('Weather', `${data.weather[0].main}`)
-          .setTimestamp()
-
-        channel.send({ embeds: [embed] })
       })
 
     res.send('Successful')
