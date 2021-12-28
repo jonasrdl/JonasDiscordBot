@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js')
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const { guildId } = require('../config.json')
 const fetch = require('node-fetch')
 const URL = 'http://status.jonasriedel.com/api/website'
 
@@ -37,5 +36,5 @@ module.exports = {
 
         interaction.reply({ embeds: [failEmbed] })
       })
-  },
+  }
 }

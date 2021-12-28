@@ -1,11 +1,11 @@
 const { MessageEmbed } = require('discord.js')
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const { guildId } = require('../config.json')
+require('dotenv').config()
 
 module.exports = {
   data: new SlashCommandBuilder().setName('server').setDescription('General server info'),
   async execute(interaction, client) {
-    const guild = client.guilds.cache.get(guildId)
+    const guild = client.guilds.cache.get(process.env.GUILD_ID)
     const owner = guild.ownerId
 
     const embed = new MessageEmbed()
@@ -18,5 +18,5 @@ module.exports = {
       .setTimestamp()
 
     return interaction.reply({ embeds: [embed] })
-  },
+  }
 }
