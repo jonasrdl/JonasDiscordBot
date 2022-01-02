@@ -144,6 +144,10 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
   console.log('Bot started!')
+
+  client.user.setActivity('mit Schlümpfen', {
+    type: 'PLAYING'
+  })
 })
 
 client.on('interactionCreate', async (interaction) => {
