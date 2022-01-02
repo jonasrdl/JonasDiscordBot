@@ -12,7 +12,7 @@ module.exports = {
       .then((data) => {
         const embed = new MessageEmbed()
           .setColor('#1f5e87')
-          .setTitle('Corona Inzidenz')
+          .setTitle('7 Tage Inzidenz Karlsruhe')
           .addField('Stadtkreis', `${data.stadtkreis}`, false)
           .addField('Landkreis', `${data.landkreis}`, false)
           .setTimestamp()
