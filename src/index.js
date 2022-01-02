@@ -54,7 +54,6 @@ app.get(`/sendWeatherMessage`, (req, res) => {
 
             if (data.weather[0].main === 'Rain') {
               guild.members.fetch(process.env.USER_ID).then((user) => {
-                user.send(`City: ${city}`)
                 user.send('Watch out, its raining!')
               })
             }
