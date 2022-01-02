@@ -5,8 +5,7 @@ require('dotenv').config()
 module.exports = {
   data: new SlashCommandBuilder().setName('server').setDescription('General server info'),
   async execute(interaction, client) {
-    const guild = client.guilds.cache.get(process.env.GUILD_ID)
-    const owner = guild.ownerId
+    const guild = client.guilds.cache.get(process.env.DISCORD_GUILD_ID)
 
     const embed = new MessageEmbed()
       .setColor('#1f5e87')
