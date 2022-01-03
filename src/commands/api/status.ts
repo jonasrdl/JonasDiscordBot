@@ -1,11 +1,12 @@
-const { MessageEmbed } = require('discord.js')
-const { SlashCommandBuilder } = require('@discordjs/builders')
+import { Command } from '../../structures/Command'
+import { MessageEmbed } from 'discord.js'
 const fetch = require('node-fetch')
 const URL = 'http://status.jonasriedel.com/api/website'
 
-module.exports = {
-  data: new SlashCommandBuilder().setName('status').setDescription('Check if services are online'),
-  async execute(interaction, client) {
+export default new Command({
+  name: 'status',
+  description: 'Check if services are online',
+  run: async ({ client, interaction }) => {
     fetch(URL)
       .then((data) => {
         if (data.status === 200) {
@@ -15,7 +16,7 @@ module.exports = {
             .addField('Website', 'Online  ✔️', false)
             .setTimestamp()
 
-          interaction.reply({ embeds: [successEmbed] })
+          interaction.followUp({ embeds: [successEmbed] })
         } else {
           const failEmbed = new MessageEmbed()
             .setColor('#1f5e87')
@@ -23,7 +24,7 @@ module.exports = {
             .addField('Website', 'Offline  ❌', false)
             .setTimestamp()
 
-          interaction.reply({ embeds: [failEmbed] })
+          interaction.followUp({ embeds: [failEmbed] })
         }
       })
       .catch((error) => {
@@ -34,7 +35,7 @@ module.exports = {
           .addField('Error', error, false)
           .setTimestamp()
 
-        interaction.reply({ embeds: [failEmbed] })
+        interaction.followUp({ embeds: [failEmbed] })
       })
-  }
-}
+  },
+})

@@ -1,16 +1,18 @@
-const { MessageEmbed } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders')
+import { Command } from '../../structures/Command'
+import { MessageEmbed } from 'discord.js'
 
-const validateNumbers = (number) => {
-  return !isNaN(number)
-}
-
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('calculator')
-    .setDescription('calculate two numbers')
-    .addStringOption((option) => option.setName('calculation').setDescription('Calculation you wanna make')),
-  async execute(interaction) {
+export default new Command({
+  name: 'calculator',
+  description: 'calculate two numbers',
+  options: [
+    {
+      name: 'calculation',
+      description: 'Calculation you wanna make',
+      type: 'STRING',
+      required: true,
+    },
+  ],
+  run: async ({ interaction }) => {
     const calculation = interaction.options.getString('calculation')
     const calculationArr = calculation.split(' ')
     const firstNumber = calculationArr[0]
@@ -25,7 +27,7 @@ module.exports = {
         .setTitle('Special characters are not yet implemented.')
         .setTimestamp()
 
-      return interaction.reply({ embeds: [embed] })
+      return interaction.followUp({ embeds: [embed] })
     }
 
     switch (operator) {
@@ -42,7 +44,7 @@ module.exports = {
             .setTitle('Division by 0 is invalid.')
             .setTimestamp()
 
-          return interaction.reply({ embeds: [embed] })
+          return interaction.followUp({ embeds: [embed] })
         }
 
         result = Number(firstNumber) / Number(secondNumber)
@@ -56,7 +58,7 @@ module.exports = {
           .setTitle('Invalid operator, try again!')
           .setTimestamp()
 
-        return interaction.reply({ embeds: [embed] })
+        return interaction.followUp({ embeds: [embed] })
     }
 
     const embed = new MessageEmbed()
@@ -64,6 +66,6 @@ module.exports = {
       .setTitle(String(result))
       .setTimestamp()
 
-    return interaction.reply({ embeds: [embed] })
-  }
-}
+    return interaction.followUp({ embeds: [embed] })
+  },
+})

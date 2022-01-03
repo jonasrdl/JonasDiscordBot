@@ -1,12 +1,11 @@
-const { MessageEmbed } = require('discord.js')
-const { SlashCommandBuilder } = require('@discordjs/builders')
+import { Command } from '../../structures/Command'
+import { MessageEmbed } from 'discord.js'
 const fetch = require('node-fetch')
 
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('corona')
-    .setDescription('Get infos about the current corona situation.'),
-  async execute(interaction) {
+export default new Command({
+  name: 'corona',
+  description: 'Get infos about the current corona situation.',
+  run: async ({ interaction }) => {
     fetch(`http://172.17.0.1:55690/incidence`)
       .then((response) => response.json())
       .then((data) => {
@@ -17,10 +16,10 @@ module.exports = {
           .addField('Landkreis', `${data.landkreis}`, false)
           .setTimestamp()
 
-        return interaction.reply({ embeds: [embed] })
+        return interaction.followUp({ embeds: [embed] })
       })
       .catch((error) => {
         console.log(error)
       })
-  }
-}
+  },
+})

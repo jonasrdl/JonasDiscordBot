@@ -1,33 +1,37 @@
 {
   "name": "jonasdiscordbot",
-  "version": "1.7.21",
-  "description": "",
-  "main": "main.js",
+  "version": "1.0.0",
+  "description": "<img alt=\"GitHub\" src=\"https://img.shields.io/github/license/jonasrdl/JonasDiscordBot\"> <img alt=\"npm\" src=\"https://img.shields.io/npm/v/jonasdiscordbot\"> <img alt=\"GitHub code size in bytes\" src=\"https://img.shields.io/github/languages/code-size/jonasrdl/JonasDiscordBot\"> <img alt=\"npm\" src=\"https://img.shields.io/npm/dt/jonasdiscordbot\"><img alt=\"GitHub Workflow Status\" src=\"https://img.shields.io/github/workflow/status/jonasrdl/JonasDiscordBot/Deploymeny%20(dev)\">",
+  "main": "index.ts",
   "scripts": {
-    "start": "node index.js",
-    "compile": "npx tsc"
+    "start": "ts-node src/index.ts",
+    "start:dev": "ts-node-dev index.ts",
+    "start:prod": "forever start ../dist/index.js",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasrdl/JonasDiscordBot.git"
   },
   "keywords": [],
-  "author": "Jonas",
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonasrdl/JonasDiscordBot/issues"
+  },
+  "homepage": "https://github.com/jonasrdl/JonasDiscordBot#readme",
   "dependencies": {
-    "@discordjs/builders": "^0.6.0",
-    "@discordjs/rest": "^0.1.0-canary.0",
-    "axios": "^0.21.1",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "discord-api-types": "^0.23.1",
-    "discord.js": "^13.2.0",
+    "discord.js": "^13.5.0",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
     "forever": "^4.0.1",
-    "node-fetch": "^2.6.1",
-    "puppeteer": "^11.0.0"
+    "glob": "^7.2.0"
   },
   "devDependencies": {
-    "jest": "^27.0.6",
-    "jest-discord": "^0.1.0",
-    "jest-environment-discord": "^0.1.0",
-    "typescript": "^4.3.5"
+    "@types/glob": "^7.2.0",
+    "@types/node": "^17.0.7",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
   }
 }

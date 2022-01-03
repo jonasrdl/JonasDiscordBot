@@ -1,14 +1,20 @@
-const { Client, Collection, Intents, MessageEmbed, Guild } = require('discord.js')
-const { SlashCommandBuilder } = require('@discordjs/builders')
+import { Command } from '../../structures/Command'
+import { MessageEmbed } from 'discord.js'
 const fetch = require('node-fetch')
-const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+const specialChars: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('weather')
-    .setDescription('get weather')
-    .addStringOption((option) => option.setName('city').setDescription('City')),
-  async execute(interaction, client) {
+export default new Command({
+  name: 'weather',
+  description: 'Get weather of a city or country',
+  options: [
+    {
+      name: 'city',
+      description: 'City or country you want to get the weather',
+      type: 'STRING',
+      required: true,
+    },
+  ],
+  run: async ({ interaction }) => {
     const city = interaction.options.getString('city')
 
     if (city === '') {
@@ -17,7 +23,7 @@ module.exports = {
         .setTitle(`Invalid city, try again!`)
         .setTimestamp()
 
-      return interaction.reply({ embeds: [embed] })
+      return interaction.followUp({ embeds: [embed] })
     }
 
     if (!specialChars.test(city)) {
@@ -37,7 +43,7 @@ module.exports = {
             .addField('Weather', `${data.weather[0].main}`)
             .setTimestamp()
 
-          return interaction.reply({ embeds: [embed] })
+          return interaction.followUp({ embeds: [embed] })
         })
     } else {
       const embed = new MessageEmbed()
@@ -45,7 +51,7 @@ module.exports = {
         .setTitle(`Invalid city, try again!`)
         .setTimestamp()
 
-      return interaction.reply({ embeds: [embed] })
+      return interaction.followUp({ embeds: [embed] })
     }
-  }
-}
+  },
+})
