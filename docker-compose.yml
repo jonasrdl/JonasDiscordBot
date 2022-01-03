@@ -1,7 +1,7 @@
 version: '3'
 services:
   bot:
-    build: src/
+    build: dist/
     restart: always
     command: npm run start:prod
     ports:
