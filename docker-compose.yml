@@ -3,7 +3,7 @@ services:
   bot:
     build: src/
     restart: always
-    command: npm start
+    command: node dist/index.js
     ports:
       - '55689:55689'
     volumes:
