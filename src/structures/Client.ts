@@ -30,14 +30,9 @@ export class ExtendedClient extends Client {
     return (await import(filePath))?.default
   }
 
-  async registerCommands({ commands, guildId }: RegisterCommandsOptions) {
-    if (guildId) {
-      this.guilds.cache.get(guildId)?.commands.set(commands)
-      console.log(`Registering commands to ${guildId}`)
-    } else {
-      this.application?.commands.set(commands)
-      console.log('Registering global commands')
-    }
+  async registerCommands({ commands }: RegisterCommandsOptions) {
+    this.application?.commands.set(commands)
+    console.log('Registering global commands')
   }
 
   async registerModules() {
