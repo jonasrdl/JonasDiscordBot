@@ -1,0 +1,10 @@
+version: '3'
+services:
+  bot:
+    build: src/
+    restart: always
+    command: npm start
+    ports:
+      - '55689:55689'
+    volumes:
+      - ./src/.env:/app/src/.env
