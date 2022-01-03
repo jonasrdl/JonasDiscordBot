@@ -2,10 +2,10 @@
   "name": "jonasdiscordbot",
   "version": "1.0.0",
   "description": "<img alt=\"GitHub\" src=\"https://img.shields.io/github/license/jonasrdl/JonasDiscordBot\"> <img alt=\"npm\" src=\"https://img.shields.io/npm/v/jonasdiscordbot\"> <img alt=\"GitHub code size in bytes\" src=\"https://img.shields.io/github/languages/code-size/jonasrdl/JonasDiscordBot\"> <img alt=\"npm\" src=\"https://img.shields.io/npm/dt/jonasdiscordbot\"><img alt=\"GitHub Workflow Status\" src=\"https://img.shields.io/github/workflow/status/jonasrdl/JonasDiscordBot/Deploymeny%20(dev)\">",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "start:dev": "ts-node-dev src/index.ts",
+    "start:dev": "ts-node-dev index.ts",
     "start:prod": "forever start ../dist/index.js",
     "build": "tsc",
     "watch": "tsc -w"

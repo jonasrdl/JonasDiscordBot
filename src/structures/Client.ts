@@ -1,14 +1,10 @@
-import {
-  ApplicationCommandDataResolvable,
-  Client,
-  ClientEvents,
-  Collection,
-} from 'discord.js'
+import { ApplicationCommandDataResolvable, Client, ClientEvents, Collection } from 'discord.js'
 import { CommandType } from '../typings/Command'
 import glob from 'glob'
 import { promisify } from 'util'
 import { RegisterCommandsOptions } from '../typings/client'
 import { Event } from './Event'
+import { client } from '..'
 
 const globPromise = promisify(glob)
 
@@ -23,6 +19,13 @@ export class ExtendedClient extends Client {
     this.registerModules()
     this.login(process.env.botToken)
   }
+
+  setActivity() {
+    client.user.setActivity('mit Schlümpfen', {
+      type: 'PLAYING'
+    })
+  }
+
   async importFile(filePath: string) {
     return (await import(filePath))?.default
   }
@@ -40,13 +43,10 @@ export class ExtendedClient extends Client {
   async registerModules() {
     // Commands
     const slashCommands: ApplicationCommandDataResolvable[] = []
-    const commandFiles = await globPromise(
-      `${__dirname}/../commands/*/*{.ts,.js}`
-    )
+    const commandFiles = await globPromise(`${__dirname}/../commands/*/*{.ts,.js}`)
     commandFiles.forEach(async (filePath) => {
       const command: CommandType = await this.importFile(filePath)
       if (!command.name) return
-      console.log(command)
 
       this.commands.set(command.name, command)
       slashCommands.push(command)
@@ -54,9 +54,10 @@ export class ExtendedClient extends Client {
 
     this.on('ready', () => {
       this.registerCommands({
-        commands: slashCommands,
-        guildId: process.env.guildId,
+        commands: slashCommands
       })
+
+      this.setActivity()
     })
 
     // Event
