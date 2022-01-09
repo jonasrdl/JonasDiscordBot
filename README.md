@@ -6,14 +6,14 @@
 
 ## General Setup
 
-If you want to use your own token, create a file called "config.json" in the `src` folder and enter the token like this:   
+Run `npm i dotenv`
 
-Example:
-```json
-{
-  "token": "your-discord-bot-token"
-}
-```
+If you want to use your own token, create a file called ".env" in the `src` folder and enter the token like this:   
+
+Example:   
+   
+`botToken=your-discord-bot-token`
+
 ## Informations
 
 <b>Don't give your bot token to anyone, they have access to your entire bot. If you publish your code, do it as described above and add the config folder to the .gitignore.</b> 
