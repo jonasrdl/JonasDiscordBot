@@ -16,6 +16,6 @@
     "importHelpers": true,
     "strict": false
   },
-  "include": ["src", "enviroment.d.ts"],
+  "include": [".", "enviroment.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
