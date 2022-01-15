@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "start:dev": "ts-node-dev index.ts",
-    "start:prod": "node /dist/src/index.js",
+    "start:prod": "node /app/dist/index.js",
     "build": "tsc",
     "watch": "tsc -w"
   },
