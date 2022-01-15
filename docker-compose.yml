@@ -6,5 +6,3 @@ services:
     command: npm run start:prod
     ports:
       - '55689:55689'
-    volumes:
-      - ./src/.env:/app/src/.env
