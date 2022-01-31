@@ -26,7 +26,7 @@ export class ExtendedClient extends Client {
     }
 
     setActivity() {
-        client.user.setActivity('mit Schlümpfen', {
+        client.user.setActivity(process.env.ACTIVITY, {
             type: 'PLAYING',
         });
     }
