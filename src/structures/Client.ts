@@ -39,14 +39,14 @@ export class ExtendedClient extends Client {
         const guildId = process.env.guildId;
 
         // Guild slash cmds for debugging
-        if (guildId) {
+        /* if (guildId) {
             this.guilds.cache.get(guildId)?.commands.set(commands);
             console.log(`Registering commands to ${guildId}`);
-        }
+        } */
 
         // GLobal slash commands for production
-        //this.application?.commands.set(commands)
-        //console.log('Registering global commands')
+        this.application?.commands.set(commands);
+        console.log('Registering global commands');
     }
 
     async registerModules() {
