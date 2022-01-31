@@ -2,7 +2,7 @@ import {
     ApplicationCommandDataResolvable,
     Client,
     ClientEvents,
-    Collection,
+    Collection
 } from 'discord.js';
 import { CommandType } from '../typings/Command';
 import glob from 'glob';
@@ -27,7 +27,7 @@ export class ExtendedClient extends Client {
 
     setActivity() {
         client.user.setActivity(process.env.ACTIVITY, {
-            type: 'PLAYING',
+            type: 'PLAYING'
         });
     }
 
@@ -37,16 +37,17 @@ export class ExtendedClient extends Client {
 
     async registerCommands({ commands }: RegisterCommandsOptions) {
         const guildId = process.env.guildId;
+        let global = true;
 
-        // Guild slash cmds for debugging
-        /* if (guildId) {
+        if (global) {
+            // Global
+            this.application?.commands.set(commands);
+            console.log('Registering global commands');
+        } else {
+            // Guild
             this.guilds.cache.get(guildId)?.commands.set(commands);
             console.log(`Registering commands to ${guildId}`);
-        } */
-
-        // GLobal slash commands for production
-        this.application?.commands.set(commands);
-        console.log('Registering global commands');
+        }
     }
 
     async registerModules() {
@@ -65,7 +66,7 @@ export class ExtendedClient extends Client {
 
         this.on('ready', () => {
             this.registerCommands({
-                commands: slashCommands,
+                commands: slashCommands
             });
 
             this.setActivity();
