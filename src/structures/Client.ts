@@ -41,11 +41,11 @@ export class ExtendedClient extends Client {
 
         if (global) {
             // Global
-            this.application?.commands.set(commands);
+            await this.application?.commands.set(commands);
             console.log('Registering global commands');
         } else {
             // Guild
-            this.guilds.cache.get(guildId)?.commands.set(commands);
+            await this.guilds.cache.get(guildId)?.commands.set(commands);
             console.log(`Registering commands to ${guildId}`);
         }
     }
