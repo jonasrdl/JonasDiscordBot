@@ -1,7 +1,7 @@
 version: '3'
 networks:
     web-control:
-        name: web-control
+      name: web-control
 services:
   bot:
     build: src/
