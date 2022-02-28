@@ -1,4 +1,7 @@
 version: '3'
+networks:
+    web-control:
+        name: web-control
 services:
   bot:
     build: src/
@@ -6,5 +9,3 @@ services:
     command: npm run start:prod
     ports:
       - '55689:55689'
-networks:
-  web-control
