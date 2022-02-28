@@ -1,7 +1,7 @@
 import express from 'express';
 import { client } from '..';
 
-const PORT = 55698;
+const PORT = 55689;
 const app = express();
 
 module.exports = {
