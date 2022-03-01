@@ -37,7 +37,7 @@ export default new Command({
             )
             .addField('Discord.js', `v${version}`, false)
             .addField('Node.js', `${process.version}`, false)
-            .addField('Operating system', `${determineOs}`)
+            .addField('Operating system', `${determineOs(os.version())}`)
             .addField('CPU', `${os.cpus()[0].model}`)
             .addField(
                 'Bot Uptime',
