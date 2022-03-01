@@ -3,6 +3,8 @@ import { MessageEmbed, version } from 'discord.js';
 import os from 'os';
 
 const determineOs = (os: string): string => {
+    console.log(os);
+
     if (os.includes('arch')) {
         return 'Arch Linux';
     } else if (os.includes('ubuntu')) {
@@ -37,7 +39,8 @@ export default new Command({
             )
             .addField('Discord.js', `v${version}`, false)
             .addField('Node.js', `${process.version}`, false)
-            .addField('Operating system', `${determineOs(os.version())}`)
+            .addField('Operating system', `${process.platform}`)
+            .addField('Kernel', `${os.release()}`)
             .addField('CPU', `${os.cpus()[0].model}`)
             .addField(
                 'Bot Uptime',

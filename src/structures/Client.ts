@@ -2,7 +2,7 @@ import {
     ApplicationCommandDataResolvable,
     Client,
     ClientEvents,
-    Collection
+    Collection,
 } from 'discord.js';
 import { CommandType } from '../typings/Command';
 import glob from 'glob';
@@ -27,7 +27,7 @@ export class ExtendedClient extends Client {
 
     setActivity() {
         client.user.setActivity(process.env.ACTIVITY, {
-            type: 'PLAYING'
+            type: 'PLAYING',
         });
     }
 
@@ -66,7 +66,7 @@ export class ExtendedClient extends Client {
 
         this.on('ready', () => {
             this.registerCommands({
-                commands: slashCommands
+                commands: slashCommands,
             });
 
             this.setActivity();
