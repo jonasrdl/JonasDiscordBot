@@ -25,9 +25,9 @@ export default new Command({
             .addField('Node.js', `${process.version}`, false)
             .addField(
                 'Operating system',
-                `\`\`\`md\n${os.version()}\n${os.release()}\`\`\``
+                `${os.release()}`
             )
-            .addField('CPU', `\`\`\`md\n${os.cpus()[0].model}\`\`\``)
+            .addField('CPU', `${os.cpus()[0].model}`)
             .addField(
                 'Bot Uptime',
                 days +
