@@ -2,6 +2,20 @@ import { Command } from '../../structures/Command';
 import { MessageEmbed, version } from 'discord.js';
 import os from 'os';
 
+const determineOs = (os: string): string => {
+    if (os.includes('arch')) {
+        return 'Arch Linux';
+    } else if (os.includes('ubuntu')) {
+        return 'Ubuntu';
+    } else if (os.includes('Windows')) {
+        return 'Windows';
+    } else if (os.includes('mac')) {
+        return 'MacOS';
+    } else {
+        return 'Unknown OS!';
+    }
+};
+
 export default new Command({
     name: 'stats',
     description: 'Stats about the bot',
@@ -23,10 +37,7 @@ export default new Command({
             )
             .addField('Discord.js', `v${version}`, false)
             .addField('Node.js', `${process.version}`, false)
-            .addField(
-                'Operating system',
-                `${os.release()}`
-            )
+            .addField('Operating system', `${determineOs}`)
             .addField('CPU', `${os.cpus()[0].model}`)
             .addField(
                 'Bot Uptime',
