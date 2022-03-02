@@ -1,15 +1,20 @@
 class Util {
-    static convertTime = (seconds: any) => {
+    /**
+     * Returns time converted to readable string
+     * @param { number } seconds - Time in seconds
+     * @returns { string } Formatted time
+     */
+    static convertTime = (seconds: number) => {
         let convert = (x: any) => {
             return x < 10 ? '0' + x : x;
         };
 
         return (
-            convert(Math.floor(seconds / (60 * 60))) +
+            convert(Math.floor(Number(seconds) / (60 * 60))) +
             'h ' +
-            convert(Math.floor(seconds / 60) % 60) +
+            convert(Math.floor(Number(seconds) / 60) % 60) +
             'm ' +
-            convert(Math.floor(seconds % 60)) +
+            convert(Math.floor(Number(seconds) % 60)) +
             's'
         );
     };

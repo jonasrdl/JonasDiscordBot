@@ -37,7 +37,7 @@ export default new Command({
             `
             )
             .addField('CPU', `${os.cpus()[0].model}`)
-            .addField('Uptime', `${Util.convertTime(os.uptime)}`);
+            .addField('Uptime', `${Util.convertTime(os.uptime())}`);
 
         return interaction.followUp({ embeds: [embed] });
     },
