@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "start:dev": "ts-node-dev index.ts",
-    "start:prod": "forever start ../dist/index.js",
+    "start:prod": "node /app/dist/index.js",
     "build": "tsc",
     "watch": "tsc -w"
   },
@@ -22,14 +22,17 @@
   },
   "homepage": "https://github.com/jonasrdl/JonasDiscordBot#readme",
   "dependencies": {
+    "@types/express": "^4.17.13",
+    "body-parser": "^1.19.1",
     "discord.js": "^13.5.0",
     "dotenv": "^10.0.0",
+    "express": "^4.17.2",
     "forever": "^4.0.1",
     "glob": "^7.2.0"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
-    "@types/node": "^17.0.7",
+    "@types/node": "^17.0.15",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"

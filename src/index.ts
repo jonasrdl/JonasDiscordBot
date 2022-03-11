@@ -1,6 +1,9 @@
-require('dotenv').config()
-import { ExtendedClient } from './structures/Client'
+require('dotenv').config();
+import { ExtendedClient } from './structures/Client';
+const api = require('./api/ApiHandler');
 
-export const client = new ExtendedClient()
+export const client = new ExtendedClient();
 
-client.start()
+api.init();
+
+client.start();
