@@ -1,5 +1,6 @@
 import { Command } from '../../structures/Command';
 import { MessageEmbed } from 'discord.js';
+import {client} from "../../index";
 
 export default new Command({
     name: 'server',
@@ -17,6 +18,7 @@ export default new Command({
             .addField('Name', `${interaction.guild.name}`, false)
             .addField('Members', `${interaction.guild.memberCount}`)
             .addField('Created at', `${interaction.guild.createdAt}`, false)
+            .addField('Server Owner', `${client.users.cache.find(user => user.id === interaction.guild.ownerId)}`, false)
             .setImage(interaction.guild.iconURL())
             .setTimestamp();
 
