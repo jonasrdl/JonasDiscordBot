@@ -20,24 +20,24 @@ export class ExtendedClient extends Client {
         super({ intents: 32767 });
     }
 
-    start() {
+    start(): void {
         this.registerModules();
         this.login(process.env.botToken);
     }
 
-    setActivity() {
+    setActivity(): void {
         client.user.setActivity(process.env.ACTIVITY, {
             type: 'PLAYING'
         });
     }
 
-    async importFile(filePath: string) {
+    async importFile(filePath: string): Promise<any> {
         return (await import(filePath))?.default;
     }
 
-    async registerCommands({ commands }: RegisterCommandsOptions) {
-        const guildId = process.env.guildId;
-        let global = true;
+    async registerCommands({ commands }: RegisterCommandsOptions): Promise<void> {
+        const guildId: string = process.env.guildId;
+        let global: boolean = true;
 
         if (global) {
             // Global
@@ -50,20 +50,20 @@ export class ExtendedClient extends Client {
         }
     }
 
-    async registerModules() {
+    async registerModules(): Promise<void> {
         // Commands
         const slashCommands: ApplicationCommandDataResolvable[] = [];
-        const commandFiles = await globPromise(
+        const commandFiles: string[] = await globPromise(
             `${__dirname}/../commands/*/*{.ts,.js}`
         );
 
-        commandFiles.forEach(async (filePath) => {
+        commandFiles.forEach(async (filePath: string) => {
             const command: CommandType = await this.importFile(filePath);
             if (!command.name) return;
 
             this.commands.set(command.name, command);
-            slashCommands.push(command);
-        });
+            slashCommands.push(command)
+        })
 
         this.on('ready', () => {
             this.registerCommands({
@@ -74,11 +74,11 @@ export class ExtendedClient extends Client {
         });
 
         // Event
-        const eventFiles = await globPromise(
+        const eventFiles: string[] = await globPromise(
             `${__dirname}/../events/*{.ts,.js}`
         );
 
-        eventFiles.forEach(async (filePath) => {
+        eventFiles.forEach(async (filePath: string) => {
             const event: Event<keyof ClientEvents> = await this.importFile(
                 filePath
             );

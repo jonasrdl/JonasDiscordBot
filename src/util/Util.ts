@@ -1,10 +1,11 @@
 class Util {
+
     /**
      * Returns time converted to readable string
      * @param { number } seconds - Time in seconds
      * @returns { string } Formatted time
      */
-    static convertTime = (seconds: number) => {
+    static convertTime = (seconds: number): string => {
         let convert = (x: any) => {
             return x < 10 ? '0' + x : x;
         };
@@ -19,7 +20,7 @@ class Util {
         );
     };
 
-    static memory = (bytes = 0, r = true) => {
+    static memory = (bytes = 0, r = true): string => {
         const gigaBytes = bytes / 1024 ** 3;
 
         if (gigaBytes > 1) {
