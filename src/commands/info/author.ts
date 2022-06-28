@@ -5,7 +5,7 @@ export default new Command({
   name: 'author',
   description: 'get information about the bot author',
   run: async ({ interaction }) => {
-    const embed = new MessageEmbed()
+    const embed: MessageEmbed = new MessageEmbed()
       .setColor('#1f5e87')
       .setTitle('Reach me on: ')
       .addField('Github', 'https://github.com/jonasrdl', false)

@@ -15,7 +15,7 @@ export default new Command({
     },
   ],
   run: async ({ interaction }) => {
-    const city = interaction.options.getString('city')
+    const city: string = interaction.options.getString('city')
 
     if (city === '') {
       const embed = new MessageEmbed()
@@ -35,7 +35,7 @@ export default new Command({
           const temperature = data.main.temp
           const temperatureFeelsLike = data.main.feels_like
 
-          const embed = new MessageEmbed()
+          const embed: MessageEmbed = new MessageEmbed()
             .setColor('#1f5e87')
             .setTitle(`Weather of ${city}`)
             .addField('Temperature', `${temperature}°C`, false)

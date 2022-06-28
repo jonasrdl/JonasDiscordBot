@@ -37,7 +37,7 @@ export class ExtendedClient extends Client {
 
     async registerCommands({ commands }: RegisterCommandsOptions) {
         const guildId = process.env.guildId;
-        let global = true;
+        let global = false;
 
         if (global) {
             // Global

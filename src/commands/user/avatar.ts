@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { Command } from '../../structures/Command';
-import { MessageEmbed } from 'discord.js';
+import {GuildMember, MessageEmbed} from 'discord.js';
 
 export default new Command({
     name: 'avatar',
@@ -17,12 +15,14 @@ export default new Command({
     run: async ({ interaction }) => {
         const user = interaction.options.getMentionable('target');
 
-        const embed = new MessageEmbed()
-            .setColor('#1f5e87')
-            .setTitle('Avatar')
-            .setImage(user.user.displayAvatarURL({ dynamic: true, size: 512 }))
-            .setTimestamp();
+        if (user instanceof GuildMember) {
+            const embed = new MessageEmbed()
+                .setColor('#1f5e87')
+                .setTitle('Avatar')
+                .setImage(user.user.displayAvatarURL({dynamic: true, size: 512}))
+                .setTimestamp();
 
-        return interaction.followUp({ embeds: [embed] });
+            return interaction.followUp({ embeds: [embed] });
+        }
     }
 });

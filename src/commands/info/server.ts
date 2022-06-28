@@ -12,7 +12,7 @@ export default new Command({
             );
         }
 
-        const embed = new MessageEmbed()
+        const embed: MessageEmbed = new MessageEmbed()
             .setColor('#1f5e87')
             .setTitle('Server information')
             .addField('Name', `${interaction.guild.name}`, false)

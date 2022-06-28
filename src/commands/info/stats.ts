@@ -7,11 +7,6 @@ export default new Command({
     name: 'stats',
     description: 'Stats about the host',
     run: async ({ client, interaction }) => {
-        const days: number = Math.floor(client.uptime / 86400000);
-        const hours: number = Math.floor(client.uptime / 3600000) % 24;
-        const minutes: number = Math.floor(client.uptime / 60000) % 60;
-        const seconds: number = Math.floor(client.uptime / 1000) % 60;
-
         const embed: MessageEmbed = new MessageEmbed()
             .setColor('#1f5e87')
             .setTitle('Stats about host')
