@@ -1,6 +1,6 @@
 import { Command } from '../../structures/Command'
 import { MessageEmbed } from 'discord.js'
-const fetch = require('node-fetch')
+const axios = require('axios');
 const specialChars: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
 export default new Command({
@@ -27,23 +27,9 @@ export default new Command({
     }
 
     if (!specialChars.test(city)) {
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_API_TOKEN}&units=metric`
-      )
-        .then((data) => data.json())
-        .then((data) => {
-          const temperature = data.main.temp
-          const temperatureFeelsLike = data.main.feels_like
-
-          const embed: MessageEmbed = new MessageEmbed()
-            .setColor('#1f5e87')
-            .setTitle(`Weather of ${city}`)
-            .addField('Temperature', `${temperature}°C`, false)
-            .addField('Feels like', `${temperatureFeelsLike}°C`, false)
-            .addField('Weather', `${data.weather[0].main}`)
-            .setTimestamp()
-
-          return interaction.followUp({ embeds: [embed] })
+      axios.get(`https://wttr.in/${city}?format=3`)
+        .then((res) => {
+          return interaction.followUp(res.data);
         })
     } else {
       const embed = new MessageEmbed()
