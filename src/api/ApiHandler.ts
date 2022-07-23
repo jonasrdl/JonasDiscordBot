@@ -1,8 +1,11 @@
 import express from 'express';
 import { client } from '..';
+const cors = require('cors');
 
 const PORT = 55689;
 const app = express();
+
+app.use(cors());
 
 module.exports = {
   init() {
