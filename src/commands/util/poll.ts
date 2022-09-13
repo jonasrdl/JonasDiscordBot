@@ -1,5 +1,5 @@
 import { Command } from '../../structures/Command';
-import { TextChannel } from 'discord.js';
+import { TextChannel, MessageEmbed } from 'discord.js';
 import { client } from '../..';
 
 export default new Command({
@@ -14,11 +14,18 @@ export default new Command({
     },
   ],
   run: async ({ interaction }) => {
-    const question = interaction.options.getString('question');
+    let question = interaction.options.getString('question');
     const channel = await client.channels.fetch(interaction.channelId);
 
+    question.includes('?') ? question : (question = `${question}?`);
+
+    const embed = new MessageEmbed()
+      .setColor('#1f5e87')
+      .setTitle(`${question}`)
+      .setTimestamp();
+
     (channel as TextChannel)
-      .send(question)
+      .send({ embeds: [embed] })
       .then((message) => {
         message.react('✔️');
         message.react('❌');
