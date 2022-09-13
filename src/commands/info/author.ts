@@ -1,5 +1,5 @@
-import { Command } from '../../structures/Command'
-import { MessageEmbed } from 'discord.js'
+import { Command } from '../../structures/Command';
+import { MessageEmbed } from 'discord.js';
 
 export default new Command({
   name: 'author',
@@ -13,8 +13,8 @@ export default new Command({
       .addField('Twitter', 'https://twitter.com/jvnxs7', false)
       .addField('Keybase', 'https://keybase.io/jonasrdl', false)
       .setThumbnail('https://avatars.githubusercontent.com/u/76961402?v=4')
-      .setTimestamp()
+      .setTimestamp();
 
-    return interaction.followUp({ embeds: [embed] })
+    return interaction.followUp({ embeds: [embed] });
   },
-})
+});

@@ -1,7 +1,7 @@
-import { Command } from '../../structures/Command'
-import { MessageEmbed } from 'discord.js'
+import { Command } from '../../structures/Command';
+import { MessageEmbed } from 'discord.js';
 const axios = require('axios');
-const specialChars: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+const specialChars: RegExp = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 export default new Command({
   name: 'weather',
@@ -15,29 +15,28 @@ export default new Command({
     },
   ],
   run: async ({ interaction }) => {
-    const city: string = interaction.options.getString('city')
+    const city: string = interaction.options.getString('city');
 
     if (city === '') {
       const embed = new MessageEmbed()
         .setColor('#FF0000')
         .setTitle(`Invalid city, try again!`)
-        .setTimestamp()
+        .setTimestamp();
 
-      return interaction.followUp({ embeds: [embed] })
+      return interaction.followUp({ embeds: [embed] });
     }
 
     if (!specialChars.test(city)) {
-      axios.get(`https://wttr.in/${city}?format=3`)
-        .then((res) => {
-          return interaction.followUp(res.data);
-        })
+      axios.get(`https://wttr.in/${city}?format=3`).then((res) => {
+        return interaction.followUp(res.data);
+      });
     } else {
       const embed = new MessageEmbed()
         .setColor('#FF0000')
         .setTitle(`Invalid city, try again!`)
-        .setTimestamp()
+        .setTimestamp();
 
-      return interaction.followUp({ embeds: [embed] })
+      return interaction.followUp({ embeds: [embed] });
     }
   },
-})
+});

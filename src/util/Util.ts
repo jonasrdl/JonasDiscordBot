@@ -1,44 +1,43 @@
 class Util {
-
-    /**
-     * Returns time converted to readable string
-     * @param { number } seconds - Time in seconds
-     * @returns { string } Formatted time
-     */
-    static convertTime = (seconds: number): string => {
-        let convert = (x: any) => {
-            return x < 10 ? '0' + x : x;
-        };
-
-        return (
-            convert(Math.floor(Number(seconds) / (60 * 60))) +
-            'h ' +
-            convert(Math.floor(Number(seconds) / 60) % 60) +
-            'm ' +
-            convert(Math.floor(Number(seconds) % 60)) +
-            's'
-        );
+  /**
+   * Returns time converted to readable string
+   * @param { number } seconds - Time in seconds
+   * @returns { string } Formatted time
+   */
+  static convertTime = (seconds: number): string => {
+    let convert = (x: any) => {
+      return x < 10 ? '0' + x : x;
     };
 
-    static memory = (bytes = 0, r = true): string => {
-        const gigaBytes = bytes / 1024 ** 3;
+    return (
+      convert(Math.floor(Number(seconds) / (60 * 60))) +
+      'h ' +
+      convert(Math.floor(Number(seconds) / 60) % 60) +
+      'm ' +
+      convert(Math.floor(Number(seconds) % 60)) +
+      's'
+    );
+  };
 
-        if (gigaBytes > 1) {
-            return `${gigaBytes.toFixed(1)} ${r ? 'GB' : ''}`;
-        }
+  static memory = (bytes = 0, r = true): string => {
+    const gigaBytes = bytes / 1024 ** 3;
 
-        const megaBytes = bytes / 1024 ** 2;
-        if (megaBytes > 1) {
-            return `${megaBytes.toFixed(2)} ${r ? 'MB' : ''}`;
-        }
+    if (gigaBytes > 1) {
+      return `${gigaBytes.toFixed(1)} ${r ? 'GB' : ''}`;
+    }
 
-        const kiloBytes = bytes / 1024;
-        if (kiloBytes > 1) {
-            return `${kiloBytes.toFixed(2)} ${r ? 'KB' : ''}`;
-        }
+    const megaBytes = bytes / 1024 ** 2;
+    if (megaBytes > 1) {
+      return `${megaBytes.toFixed(2)} ${r ? 'MB' : ''}`;
+    }
 
-        return `${bytes.toFixed(2)} ${r ? 'B' : ''}`;
-    };
+    const kiloBytes = bytes / 1024;
+    if (kiloBytes > 1) {
+      return `${kiloBytes.toFixed(2)} ${r ? 'KB' : ''}`;
+    }
+
+    return `${bytes.toFixed(2)} ${r ? 'B' : ''}`;
+  };
 }
 
 export default Util;

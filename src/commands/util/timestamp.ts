@@ -1,11 +1,11 @@
-import { Command } from '../../structures/Command'
-import { MessageEmbed } from 'discord.js'
+import { Command } from '../../structures/Command';
+import { MessageEmbed } from 'discord.js';
 
 function formatTimestamp(timestamp) {
-  const milliseconds = timestamp * 1000
-  const dateObject = new Date(milliseconds)
+  const milliseconds = timestamp * 1000;
+  const dateObject = new Date(milliseconds);
 
-  return dateObject.toLocaleString('de-DE', { timeZoneName: 'short' })
+  return dateObject.toLocaleString('de-DE', { timeZoneName: 'short' });
 }
 
 export default new Command({
@@ -16,17 +16,17 @@ export default new Command({
       name: 'timestamp',
       description: 'Timestamp you want to convert',
       type: 'STRING',
-      required: true
-    }
+      required: true,
+    },
   ],
   run: async ({ interaction }) => {
-    const timestamp = interaction.options.getString('timestamp')
+    const timestamp = interaction.options.getString('timestamp');
 
     const embed = new MessageEmbed()
       .setColor('#1f5e87')
       .addField('Converted timestamp', `${formatTimestamp(timestamp)}`)
-      .setTimestamp()
+      .setTimestamp();
 
-    return interaction.followUp({ embeds: [embed] })
-  }
-})
+    return interaction.followUp({ embeds: [embed] });
+  },
+});
