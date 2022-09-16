@@ -1,7 +1,7 @@
 import { Command } from '../../structures/Command';
 import { MessageEmbed, version } from 'discord.js';
 import os from 'os';
-import Util from '../../util/Util';
+import { memory, convertTime } from '../../util/Util';
 
 export default new Command({
   name: 'stats',
@@ -12,7 +12,7 @@ export default new Command({
       .setTitle('Stats about host')
       .addField(
         'RAM',
-        `${Util.memory(os.totalmem() - os.freemem(), false)} / ${Util.memory(
+        `${memory(os.totalmem() - os.freemem(), false)} / ${memory(
           os.totalmem(),
         )}`,
         false,
@@ -31,7 +31,7 @@ export default new Command({
             `,
       )
       .addField('CPU', `${os.cpus()[0].model}`)
-      .addField('Uptime', `${Util.convertTime(os.uptime())}`);
+      .addField('Uptime', `${convertTime(os.uptime())}`);
 
     return interaction.followUp({ embeds: [embed] });
   },
