@@ -27,9 +27,14 @@ export default new Command({
     }
 
     if (!specialChars.test(city)) {
-      axios.get(`https://wttr.in/${city}?format=3`).then((res) => {
-        return interaction.followUp(res.data);
-      });
+      const embed = new MessageEmbed()
+        .setColor('#7CFC00')
+        .setTitle(`${city}`)
+        .setImage(`https://wttr.in/${city}_0tqp_lang=de.png`)
+        .setTimestamp();
+    
+      return interaction.followUp({ embeds: [embed] })
+
     } else {
       const embed = new MessageEmbed()
         .setColor('#FF0000')
