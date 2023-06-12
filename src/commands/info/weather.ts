@@ -27,14 +27,17 @@ export default new Command({
     }
 
     if (!specialChars.test(city)) {
-      const embed = new MessageEmbed()
+      const response = await fetch(`https://wttr.in/${city}?format=3`);
+      
+      response.text().then(function (text) {
+        const embed = new MessageEmbed()
         .setColor('#7CFC00')
         .setTitle(`${city}`)
-        .setImage(`https://wttr.in/${city}_0tqp_lang=de.png`)
+        .addField(`Weather in ${city}`, text)
         .setTimestamp();
     
-      return interaction.followUp({ embeds: [embed] })
-
+        return interaction.followUp({ embeds: [embed] })  
+      });
     } else {
       const embed = new MessageEmbed()
         .setColor('#FF0000')
